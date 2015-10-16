@@ -46,7 +46,7 @@ MAKE_SRC = -j$(J) V=$(V)
 
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
+VERSION_REPO ?= http://downloads.openwrt.org/chaos_calmer/15.05/%S/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
