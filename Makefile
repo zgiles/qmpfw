@@ -30,7 +30,7 @@ QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Clearance
 QMP_RELEASE ?= testing
-QMP_FEED = package/feeds/qmp_packages
+QMP_FEED = package/feeds/qmp
 
 BUILD_DIR = build
 CONFIG_DIR = configs
@@ -50,7 +50,7 @@ VERSION_REPO ?= http://downloads.openwrt.org/chaos_calmer/15.05/%S/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= 3.2-rc3
+VERSION_NUMBER ?= testing
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
