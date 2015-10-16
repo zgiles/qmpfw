@@ -4,7 +4,7 @@
 # Not recommended to use in a read/write development environment.
 #
 # Example of usage:
-# FORCE="1" TARGETS="alix rspro" COMMUNITY="myNet" BRANCH="testing" ./nightlycompile.sh
+# FORCE="1" TARGETS="alix rspro" COMMUNITY="myNet" BRANCH="master" ./nightlycompile.sh
 # 
 
 # Mail to send alerts in case something goes wrong
@@ -14,7 +14,7 @@ MAIL="admin@qmp.cat"
 DAYS_TO_PRESERVE="10"
 
 COMMUNITY=${COMMUNITY:-qMp}
-BRANCH=${BRANCH:-testing}
+BRANCH=${BRANCH:-master}
 
 # If target is not specified, compiling for all targets
 TARGETS=${TARGETS:-$(make list_targets)}
