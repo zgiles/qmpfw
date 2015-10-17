@@ -20,7 +20,7 @@ BRANCH=${BRANCH:-testing}
 TARGETS=${TARGETS:-$(make list_targets)}
 
 # Targets which are not gonna be compiled
-NOTARGETS=${NOTARGETS:-}
+NOTARGETS=${NOTARGETS:-ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib}
 
 # Extra packages (separated by spaces)
 EXTRA_PACKS=${EXTRA_PACKS:-}
