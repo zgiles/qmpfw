@@ -1,5 +1,5 @@
 #    [qMp] firmware generator (http://qmp.cat)
-
+ 
 #    Copyright (C) 2011-2015 Routek S.L. (http://routek.net)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,13 +21,12 @@
 #	Agustí Moll
 #	Roger Pueyo Centelles
 
-#OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
-OWRT_SCM = git clone git://git.openwrt.org/15.05/openwrt.git
-OWRT_PKG_SCM = git clone -b for-15.05 https://github.com/openwrt/packages.git
+OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
+OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= QinQ
+QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Kalimotxo
 QMP_RELEASE ?= trunk
 QMP_FEED = package/feeds/qmp_packages
@@ -46,7 +45,7 @@ MAKE_SRC = -j$(J) V=$(V)
 
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-VERSION_REPO ?= http://fw.qmp.cat/$(VERSION_NUMBER)_openwrt-%T-generic/packages
+VERSION_REPO ?= http://downloads.openwrt.org/snapshots/trunk
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Kalimotxo
 VERSION_CODE ?= Kalimotxo
