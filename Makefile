@@ -27,9 +27,9 @@ OWRT_PKG_SCM = git clone -b for-15.05 https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= testing
-QMP_CODENAME ?= Clearance
-QMP_RELEASE ?= testing
+QMP_GIT_BRANCH ?= semtor
+QMP_CODENAME ?= Semtor
+QMP_RELEASE ?= semtor
 QMP_FEED = package/feeds/qmp
 
 BUILD_DIR = build
@@ -48,9 +48,9 @@ IMAGEOPT ?= true
 VERSIONOPT ?= true
 VERSION_REPO ?= http://downloads.openwrt.org/chaos_calmer/15.05/%S/packages
 VERSION_DIST ?= qMp
-VERSION_NICK ?= Clearance
-VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= testing
+VERSION_NICK ?= Semtor
+VERSION_CODE ?= Semtor
+VERSION_NUMBER ?= semtor
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
