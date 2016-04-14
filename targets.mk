@@ -34,8 +34,8 @@ ifeq ($(T),alix)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-geode-combined-squashfs.img
+  IMAGE:=bin/$(ARCH)/qmp-x86-geode-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/qmp-x86-geode-combined-squashfs.img
 endif
 
 ifeq ($(T),x86)
@@ -43,8 +43,8 @@ ifeq ($(T),x86)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+  IMAGE:=bin/$(ARCH)/qmp-x86-generic-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/qmp-x86-generic-combined-squashfs.img
 endif
 
 ifeq ($(T),soekris45xx)
@@ -52,8 +52,8 @@ ifeq ($(T),soekris45xx)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=x86-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-squashfs.img
+  IMAGE:=bin/$(ARCH)/qmp-x86-generic-combined-squashfs.img
+  SYSUPGRADE:=bin/$(ARCH)/qmp-x86-generic-combined-squashfs.img
 endif
 
 ifeq ($(T),bullet)
@@ -61,8 +61,8 @@ ifeq ($(T),bullet)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-bullet-m-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-bullet-m-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-bullet-m-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-bullet-m-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),cf-wr800n)
@@ -70,8 +70,8 @@ ifeq ($(T),cf-wr800n)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),nsm2)
@@ -79,8 +79,8 @@ ifeq ($(T),nsm2)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),nsm5)
@@ -88,8 +88,8 @@ ifeq ($(T),nsm5)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),nsm5-xw)
@@ -97,8 +97,8 @@ ifeq ($(T),nsm5-xw)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-xw-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-nano-m-xw-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-nano-m-xw-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),nslm5-xw)
@@ -106,8 +106,8 @@ ifeq ($(T),nslm5-xw)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-loco-m-xw-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-loco-m-xw-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-loco-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-loco-m-xw-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),rocket-m-xw)
@@ -115,8 +115,8 @@ ifeq ($(T),rocket-m-xw)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-xw-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-xw-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rocket-m-xw-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rocket-m-xw-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),pico2)
@@ -125,7 +125,7 @@ ifeq ($(T),pico2)
   TBUILD:=openwrt
   PROFILE:=at2-qmp-tiny-node
   BUILD_PATH:=$(BUILD_DIR)/ath25
-  IMAGE:=bin/$(ARCH)/openwrt-ath25-ubnt2-pico2-squashfs.bin
+  IMAGE:=bin/$(ARCH)/qmp-ath25-ubnt2-pico2-squashfs.bin
 endif
 
 ifeq ($(T),rocket)
@@ -133,8 +133,8 @@ ifeq ($(T),rocket)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rocket-m-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rocket-m-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),rs)
@@ -142,8 +142,8 @@ ifeq ($(T),rs)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rs-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rs-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rs-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),rspro)
@@ -151,8 +151,8 @@ ifeq ($(T),rspro)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rspro-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-rspro-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rspro-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-rspro-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-2543)
@@ -160,8 +160,8 @@ ifeq ($(T),tl-2543)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr2543-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr2543-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr2543-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr2543-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),mc-mac1200r)
@@ -169,8 +169,8 @@ ifeq ($(T),mc-mac1200r)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-mc-mac1200r-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-mc-mac1200r-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-mc-mac1200r-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-mc-mac1200r-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v7)
@@ -178,8 +178,8 @@ ifeq ($(T),tl-wr841n-v7)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841nd-v7-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841nd-v7-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841nd-v7-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841nd-v7-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v8)
@@ -187,8 +187,8 @@ ifeq ($(T),tl-wr841n-v8)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v8-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v8-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v9)
@@ -196,8 +196,8 @@ ifeq ($(T),tl-wr841n-v9)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
@@ -205,8 +205,8 @@ ifeq ($(T),tl-842)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr842n-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr842n-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr842n-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr842n-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-703n)
@@ -214,8 +214,8 @@ ifeq ($(T),tl-703n)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr703n-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr703n-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr703n-v1-squashfs-sysupgrade.bin
 endif
 
 
@@ -224,8 +224,8 @@ ifeq ($(T),tl-mr3020)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-mr3020-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-mr3020-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-mr3020-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-mr3020-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-mr3040)
@@ -233,8 +233,8 @@ ifeq ($(T),tl-mr3040)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-mr3040-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-mr3040-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-mr3040-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-mr3040-v1-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),tl-wdr3600)
@@ -242,8 +242,8 @@ ifeq ($(T),tl-wdr3600)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3600-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3600-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr4300)
@@ -251,16 +251,16 @@ ifeq ($(T),tl-wdr4300)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr4300-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr4300-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr4900-v1)
   NAME:=TP-Link_TL-WDR4900-v1
   ARCH:=mpc85xx
   TBUILD:=openwrt
-  IMAGE:=bin/$(ARCH)/openwrt-mpc85xx-generic-tl-wdr4900-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-mpc85xx-generic-tl-wdr4900-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-mpc85xx-generic-tl-wdr4900-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-mpc85xx-generic-tl-wdr4900-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr743nd)
@@ -268,8 +268,8 @@ ifeq ($(T),tl-wr743nd)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr743nd-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr743nd-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr743nd-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr743nd-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr740n)
@@ -277,8 +277,8 @@ ifeq ($(T),tl-wr740n)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr740n-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr740n-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr740n-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr740n-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wpe72)
@@ -286,7 +286,7 @@ ifeq ($(T),wpe72)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-wpe72-squashfs-8M-factory.img
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-wpe72-squashfs-8M-factory.img
 endif
 
 ifeq ($(T),dragino2)
@@ -294,8 +294,8 @@ ifeq ($(T),dragino2)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-dragino2-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-dragino2-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-dragino2-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-dragino2-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),unifi-ap)
@@ -303,8 +303,8 @@ ifeq ($(T),unifi-ap)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-unifi-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-unifi-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-unifi-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),uap-pro)
@@ -312,8 +312,8 @@ ifeq ($(T),uap-pro)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-uap-pro-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-ubnt-uap-pro-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-uap-pro-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-ubnt-uap-pro-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),vbox)
@@ -321,7 +321,7 @@ ifeq ($(T),vbox)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=vm-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.img.gz
+  IMAGE:=bin/$(ARCH)/qmp-x86-generic-combined-ext4.img.gz
 endif
 
 ifeq ($(T),vmware)
@@ -329,8 +329,8 @@ ifeq ($(T),vmware)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=vm-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-x86-generic-combined-ext4.vmdk
+  IMAGE:=bin/$(ARCH)/qmp-x86-generic-combined-ext4.vmdk
+  SYSUPGRADE:=bin/$(ARCH)/qmp-x86-generic-combined-ext4.vmdk
 endif
 
 ifeq ($(T),vocore)
@@ -338,7 +338,7 @@ ifeq ($(T),vocore)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=rt5350-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-vocore-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-rt305x-vocore-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),microwrt)
@@ -346,7 +346,7 @@ ifeq ($(T),microwrt)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-microwrt-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-microwrt-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),wrtnode)
@@ -354,7 +354,7 @@ ifeq ($(T),wrtnode)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),wt1520-4m)
@@ -362,8 +362,8 @@ ifeq ($(T),wt1520-4m)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=rt5350-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-rt305x-wt1520-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wt1520-8m)
@@ -371,8 +371,8 @@ ifeq ($(T),wt1520-8m)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=rt5350-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-rt305x-wt1520-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wt3020-4m)
@@ -380,8 +380,8 @@ ifeq ($(T),wt3020-4m)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-4M-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-wt3020-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-wt3020-4M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wt3020-8m)
@@ -389,8 +389,8 @@ ifeq ($(T),wt3020-8m)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-8M-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-wt3020-8M-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-wt3020-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-wt3020-8M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),xiaomi-miwifi-mini)
@@ -398,8 +398,8 @@ ifeq ($(T),xiaomi-miwifi-mini)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),dir-810l)
@@ -407,7 +407,7 @@ ifeq ($(T),dir-810l)
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ramips-mt7620-dir-810l-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-dir-810l-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),kvm)
@@ -415,7 +415,7 @@ ifeq ($(T),kvm)
   ARCH:=x86
   TBUILD:=openwrt
   PROFILE:=kvm-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-x86-kvm_guest-combined-ext4.img.gz
+  IMAGE:=bin/$(ARCH)/qmp-x86-kvm_guest-combined-ext4.img.gz
 endif
 
 ifeq ($(T),ar71xx-ib)
