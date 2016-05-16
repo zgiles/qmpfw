@@ -21,8 +21,8 @@
 #	Agustí Moll
 #	Roger Pueyo Centelles
 
-OWRT_SCM = git clone git://git.openwrt.org/openwrt.git
-OWRT_PKG_SCM = git clone https://github.com/openwrt/packages.git
+LEDE_SOURCE_CLONE = git clone http://git.lede-project.org/source.git
+LEDE_PKG_CLONE = git clone https://github.com/openwrt/packages.git
 
 QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
@@ -45,7 +45,7 @@ MAKE_SRC = -j$(J) V=$(V)
 
 IMAGEOPT ?= true
 VERSIONOPT ?= true
-VERSION_REPO ?= http://downloads.openwrt.org/snapshots/trunk
+VERSION_REPO ?= http://downloads.lede-project.org/snapshots
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Kalimotxo
 VERSION_CODE ?= Kalimotxo
@@ -96,7 +96,7 @@ define copy_feeds_file
 endef
 
 define checkout_src
-	$(OWRT_SCM) $(BUILD_PATH)
+	$(LEDE_SOURCE_CLONE) $(BUILD_PATH)
 	mkdir -p dl
 	ln -fs ../../dl $(BUILD_PATH)/dl
 	ln -fs ../qmp/files $(BUILD_PATH)/files
@@ -106,7 +106,7 @@ define checkout_src
 endef
 
 define checkout_owrt_pkg_override
-	$(OWRT_PKG_SCM) $(BUILD_DIR)/packages.$(TARGET)
+	$(LEDE_PKG_CLONE) $(BUILD_DIR)/packages.$(TARGET)
 	sed -i -e "s|src-link packages .*|src-link packages `pwd`/$(BUILD_DIR)/packages.$(TARGET)|" $(BUILD_PATH)/feeds.conf
 endef
 
@@ -215,11 +215,11 @@ all: build
 	@touch $@
 
 .checkout_owrt_pkg:
-	$(OWRT_PKG_SCM) $(BUILD_DIR)/packages
+	$(LEDE_PKG_CLONE) $(BUILD_DIR)/packages
 	@touch $@
 
 .checkout_owrt_pkg_override:
-	$(if $(filter $(origin OWRT_PKG_SCM),override),$(if $(wildcard .checkout_owrt_pkg_override_$(TARGET)),,$(call checkout_owrt_pkg_override)),)
+	$(if $(filter $(origin LEDE_PKG_CLONE),override),$(if $(wildcard .checkout_owrt_pkg_override_$(TARGET)),,$(call checkout_owrt_pkg_override)),)
 	@touch .checkout_owrt_pkg_override_$(TARGET)
 
 .checkout_owrt:
