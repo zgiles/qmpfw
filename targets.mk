@@ -498,7 +498,7 @@ ifeq ($(T),ar71xx-generic-ib)
   TBUILD:=lede
   PROFILE:=ar71xx-generic-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),ath25-generic-ib)
@@ -508,7 +508,7 @@ ifeq ($(T),ath25-generic-ib)
   TBUILD:=lede
   PROFILE:=ath25-generic-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),mpc85xx-generic-ib)
@@ -518,7 +518,7 @@ ifeq ($(T),mpc85xx-generic-ib)
   TBUILD:=lede
   PROFILE:=mpc85xx-generic-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),ramips-mt7620-ib)
@@ -528,7 +528,16 @@ ifeq ($(T),ramips-mt7620-ib)
   TBUILD:=lede
   PROFILE:=ramips-mt7620-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+endif
+
+ifeq ($(T),sunxi-ib)
+  NAME:=sunxi_imagebuilder
+  ARCH:=sunxi
+  TBUILD:=openwrt
+  PROFILE:=sunxi-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),ramips-rt305x-ib)
@@ -538,7 +547,7 @@ ifeq ($(T),ramips-rt305x-ib)
   TBUILD:=lede
   PROFILE:=ramips-rt305x-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),x86-generic-ib)
@@ -548,7 +557,7 @@ ifeq ($(T),x86-generic-ib)
   TBUILD:=lede
   PROFILE:=x86-generic-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
 ifeq ($(T),x86-geode-ib)
@@ -558,6 +567,5 @@ ifeq ($(T),x86-geode-ib)
   TBUILD:=lede
   PROFILE:=x86-geode-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
-

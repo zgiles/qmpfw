@@ -1,0 +1,2 @@
+CONFIG_TARGET_sunxi=y
+CONFIG_ALL=y
