@@ -20,7 +20,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-842 tl-mr3020 tl-mr3040 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini ar71xx-generic-ib ath25-generic-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-rt305x-ib x86-generic-ib x86-geode-ib
+HW_AVAILABLE := ar71xx alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini lamobo-r1 ar71xx-generic-ib ath25-generic-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-rt305x-ib x86-generic-ib x86-geode-ib
 TBUILD_LIST := lede
 
 ifeq ($(T),ar71xx)
@@ -29,6 +29,16 @@ ifeq ($(T),ar71xx)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-tiny-node
+endif
+
+ifeq ($(T),alfa-nx)
+  NAME:=Alfa-Network_N5
+  ARCH:=ar71xx
+  SUBARCH:=generic
+  TBUILD:=lede
+  PROFILE:=ath-qmp-small-node
+  IMAGE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),alix)
@@ -119,6 +129,15 @@ ifeq ($(T),nslm5-xw)
   PROFILE:=ath-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-ubnt-loco-m-xw-squashfs-factory.bin
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-ubnt-loco-m-xw-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),lamobo-r1)
+  NAME:=Lamobo_R1
+  ARCH:=sunxi
+  SUBARCH:=generic
+  TBUILD:=lede
+  PROFILE:=sunxi-qmp-small-node
+  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-sunxi-Lamobo_R1-sdcard-vfat-ext4.img
 endif
 
 ifeq ($(T),rocket-m-xw)
@@ -219,6 +238,15 @@ ifeq ($(T),tl-wr841n-v9)
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),tl-wr841n-v10)
+  NAME:=TP-Link_TL-WR841N-v10
+  ARCH:=ar71xx
+  TBUILD:=lede
+  PROFILE:=ar71xx_kstrip-qmp-tiny-node
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
