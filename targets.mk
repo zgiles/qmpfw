@@ -480,6 +480,15 @@ ifeq ($(T),ramips-ib)
   IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif
 
+ifeq ($(T),sunxi-ib)
+  NAME:=sunxi_imagebuilder
+  ARCH:=sunxi
+  TBUILD:=openwrt
+  PROFILE:=sunxi-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-sunxi-x86_64.tar.bz2
+endif
+
 ifeq ($(T),x86-ib)
   NAME:=x86_imagebuilder
   ARCH:=x86
@@ -488,4 +497,3 @@ ifeq ($(T),x86-ib)
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
   IMAGE:=bin/$(ARCH)/OpenWrt-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-ar71xx-x86_64.tar.bz2
 endif
-
