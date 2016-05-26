@@ -34,8 +34,8 @@ ifeq ($(T),alfa-nx)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-alfa-nx-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),alix)
@@ -124,7 +124,7 @@ ifeq ($(T),lamobo-r1)
   ARCH:=sunxi
   TBUILD:=openwrt
   PROFILE:=sunxi-qmp-small-node
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-sunxi-Lamobo_R1-sdcard-vfat-ext4.img
+  SYSUPGRADE:=bin/$(ARCH)/qmp-sunxi-Lamobo_R1-sdcard-vfat-ext4.img
 endif
 
 ifeq ($(T),rocket-m-xw)
@@ -222,8 +222,8 @@ ifeq ($(T),tl-wr841n-v10)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
