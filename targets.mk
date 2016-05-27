@@ -19,7 +19,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := ar71xx alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m xiaomi-miwifi-mini lamobo-r1 ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib sunxi-ib
+HW_AVAILABLE := ar71xx alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini lamobo-r1 ar71xx-ib ath25-ib mpc85xx-ib ramips-ib x86-ib sunxi-ib
 TBUILD_LIST := openwrt
 
 ifeq ($(T),ar71xx)
@@ -419,13 +419,13 @@ ifeq ($(T),wt3020-8m)
   SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-wt3020-8M-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),xiaomi-miwifi-mini)
+ifeq ($(T),miwifi-mini)
   NAME:=Xiaomi_MiWiFi-Mini
   ARCH:=ramips
   TBUILD:=openwrt
   PROFILE:=mt7620-qmp-small-node
-  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
-  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-xiaomi-miwifi-mini-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ramips-mt7620-miwifi-mini-squashfs-sysupgrade.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ramips-mt7620-miwifi-mini-squashfs-sysupgrade.bin
 endif 
 
 ifeq ($(T),dir-810l)
