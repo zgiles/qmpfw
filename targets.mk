@@ -37,8 +37,8 @@ ifeq ($(T),alfa-nx)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),alix)
@@ -137,7 +137,7 @@ ifeq ($(T),lamobo-r1)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=sunxi-qmp-small-node
-  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-sunxi-Lamobo_R1-sdcard-vfat-ext4.img
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-sunxi-Lamobo_R1-sdcard-vfat-ext4.img
 endif
 
 ifeq ($(T),rocket-m-xw)
@@ -245,8 +245,8 @@ ifeq ($(T),tl-wr841n-v10)
   ARCH:=ar71xx
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
