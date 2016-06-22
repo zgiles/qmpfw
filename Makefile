@@ -29,7 +29,7 @@ QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
 QMP_GIT_RO = git://qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= master
 QMP_CODENAME ?= Clearance
-QMP_RELEASE ?= 3.2
+QMP_RELEASE ?= 3.2.1
 QMP_FEED = package/feeds/qmp
 
 BUILD_DIR = build
@@ -50,7 +50,7 @@ VERSION_REPO ?= http://downloads.openwrt.org/chaos_calmer/15.05.1/%S/packages
 VERSION_DIST ?= qMp
 VERSION_NICK ?= Clearance
 VERSION_CODE ?= Clearance
-VERSION_NUMBER ?= 3.2
+VERSION_NUMBER ?= 3.2.1
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
