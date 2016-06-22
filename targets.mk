@@ -268,8 +268,8 @@ ifeq ($(T),tl-wa7510n)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wa7510n-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wa7510n-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr3500-v1)
@@ -277,8 +277,8 @@ ifeq ($(T),tl-wdr3500-v1)
   ARCH:=ar71xx
   TBUILD:=openwrt
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr3500-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/openwrt-ar71xx-generic-tl-wdr3500-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr3600)
