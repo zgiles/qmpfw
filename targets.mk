@@ -629,3 +629,13 @@ ifeq ($(T),x86-geode-ib)
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
+
+ifeq ($(T),x86-64-ib)
+  NAME:=x86_64_imagebuilder
+  ARCH:=x86
+  SUBARCH:=64
+  TBUILD:=lede
+  PROFILE:=x86-64-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+endif
