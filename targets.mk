@@ -1,9 +1,9 @@
 # targets.mk
-# Copyright (C) 2011-2013 qmp.cat
+# Copyright (C) 2011-2016 qmp.cat
 #
-# This is free software, licensed under the GNU General Public License v3. 
+# This is free software, licensed under the GNU General Public License v3.
 # See LICENSE for more information.
-# 
+#
 #
 # For each target the next variables must be defined
 #  NAME := The name of the device used for output firmware file name
@@ -89,7 +89,7 @@ ifeq ($(T),cf-wr800n)
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-cf-wr800n-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),nsm2)
   NAME:=Ubiquiti_NanoStation-M2
@@ -288,7 +288,7 @@ ifeq ($(T),tl-mr3040)
   PROFILE:=ath-qmp-tiny-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-mr3040-v1-squashfs-factory.bin
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-mr3040-v1-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),tl-wa7510n)
   NAME:=TP-Link_TL-WA7510N
@@ -423,7 +423,7 @@ ifeq ($(T),vocore)
   TBUILD:=lede
   PROFILE:=rt5350-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-vocore-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),microwrt)
   NAME:=Microduino_MicroWRT
@@ -432,7 +432,7 @@ ifeq ($(T),microwrt)
   TBUILD:=lede
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-microwrt-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),wrtnode)
   NAME:=WRTnode_WRTnode
@@ -441,7 +441,7 @@ ifeq ($(T),wrtnode)
   TBUILD:=lede
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),wt1520-4m)
   NAME:=Nexx_WT1520-4M
@@ -491,7 +491,7 @@ ifeq ($(T),miwifi-mini)
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-miwifi-mini-squashfs-sysupgrade.bin
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-miwifi-mini-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),dir-810l)
   NAME:=D-Link_DIR-810L
@@ -500,7 +500,7 @@ ifeq ($(T),dir-810l)
   TBUILD:=lede
   PROFILE:=mt7620-qmp-small-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-dir-810l-squashfs-sysupgrade.bin
-endif 
+endif
 
 ifeq ($(T),kvm)
   NAME:=KVM_x86
@@ -527,6 +527,36 @@ ifeq ($(T),ath25-generic-ib)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath25-generic-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+endif
+
+ifeq ($(T),brcm2708-bcm2708-ib)
+  NAME:=brcm2708_bcm2708_imagebuilder
+  ARCH:=brcm2708
+  SUBARCH:=bcm2708
+  TBUILD:=lede
+  PROFILE:=brcm2708-bcm2708-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+endif
+
+ifeq ($(T),brcm2708-bcm2709-ib)
+  NAME:=brcm2708_bcm2709_imagebuilder
+  ARCH:=brcm2708
+  SUBARCH:=bcm2709
+  TBUILD:=lede
+  PROFILE:=brcm2708-bcm2709-imagebuilder
+  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+endif
+
+ifeq ($(T),brcm2708-bcm2710-ib)
+  NAME:=brcm2708_bcm2710_imagebuilder
+  ARCH:=brcm2708
+  SUBARCH:=bcm2710
+  TBUILD:=lede
+  PROFILE:=brcm2708-bcm2710-imagebuilder
   override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
