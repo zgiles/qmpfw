@@ -29,8 +29,8 @@ ifeq ($(T),alfa-nx)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-alfa-nx-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-alfa-nx-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),alix)
@@ -357,7 +357,8 @@ ifeq ($(T),wpe72)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-wpe72-squashfs-8M-factory.img
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-wpe72-squashfs-8M-factory.img
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-wpe72-squashfs-8M-sysupgrade.img
 endif
 
 ifeq ($(T),dragino2)
@@ -366,8 +367,8 @@ ifeq ($(T),dragino2)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-small-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-dragino2-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-dragino2-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-dragino2-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ar71xx-generic-dragino2-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),unifi-ap)
