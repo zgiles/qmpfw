@@ -208,8 +208,8 @@ ifeq ($(T),tl-wr841n-v7)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841nd-v7-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841nd-v7-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v7-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v7-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v8)
@@ -218,8 +218,8 @@ ifeq ($(T),tl-wr841n-v8)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v8-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v8-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v8-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v8-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v9)
@@ -228,8 +228,8 @@ ifeq ($(T),tl-wr841n-v9)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841n-v9-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v9-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v9-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wr841n-v10)
@@ -237,8 +237,8 @@ ifeq ($(T),tl-wr841n-v10)
   ARCH:=ar71xx
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841n-v10-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
