@@ -20,7 +20,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
+HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt wrtnode wt3020-4M wt3020-8M miwifi-mini lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
 TBUILD_LIST := lede
 
 ifeq ($(T),alfa-nx)
@@ -447,7 +447,7 @@ ifeq ($(T),wrtnode)
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-wrtnode-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),wt1520-4m)
+ifeq ($(T),wt1520-4M)
   NAME:=Nexx_WT1520-4M
   ARCH:=ramips
   SUBARCH:=rt305x
@@ -457,7 +457,7 @@ ifeq ($(T),wt1520-4m)
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),wt1520-8m)
+ifeq ($(T),wt1520-8M)
   NAME:=Nexx_WT1520-8M
   ARCH:=ramips
   SUBARCH:=rt305x
@@ -467,7 +467,7 @@ ifeq ($(T),wt1520-8m)
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),wt3020-4m)
+ifeq ($(T),wt3020-4M)
   NAME:=Nexx_WT3020-4M
   ARCH:=ramips
   SUBARCH:=mt7620
@@ -477,7 +477,7 @@ ifeq ($(T),wt3020-4m)
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-mt7620-wt3020-4M-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),wt3020-8m)
+ifeq ($(T),wt3020-8M)
   NAME:=Nexx_WT3020-8M
   ARCH:=ramips
   SUBARCH:=mt7620
