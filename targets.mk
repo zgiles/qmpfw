@@ -451,8 +451,8 @@ ifeq ($(T),wt1520-4m)
   SUBARCH:=rt305x
   TBUILD:=lede
   PROFILE:=rt5350-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-wt1520-4M-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-4M-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-4M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wt1520-8m)
@@ -461,8 +461,8 @@ ifeq ($(T),wt1520-8m)
   SUBARCH:=rt305x
   TBUILD:=lede
   PROFILE:=rt5350-qmp-small-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-wt1520-8M-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-8M-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/lede-ramips-rt305x-wt1520-8M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),wt3020-4m)
