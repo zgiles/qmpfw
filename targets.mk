@@ -20,7 +20,7 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72 dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
+HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543 tl-703n tl-wr841n-v7 tl-wr841n-v8 tl-wr841n-v9 tl-wr841n-v10 tl-842 tl-mr3020 tl-mr3040 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore wt1520-4m wt1520-8m cf-wr800n dir-810l microwrt wrtnode wt3020-4m wt3020-8m miwifi-mini lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
 TBUILD_LIST := lede
 
 ifeq ($(T),alfa-nx)
@@ -149,7 +149,7 @@ ifeq ($(T),pico2)
   TBUILD:=lede
   PROFILE:=at2-qmp-tiny-node
   BUILD_PATH:=$(BUILD_DIR)/ath25
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ath25-ubnt2-pico2-squashfs.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ath25-ubnt2-pico2-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),rocket)
@@ -351,8 +351,8 @@ ifeq ($(T),tl-wr740n)
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr740n-v1-squashfs-sysupgrade.bin
 endif
 
-ifeq ($(T),wpe72)
-  NAME:=Compex_WPE72
+ifeq ($(T),wpe72-8M)
+  NAME:=Compex_WPE72-8M
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
@@ -409,13 +409,22 @@ ifeq ($(T),vmware)
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-x86-generic-combined-ext4.vmdk
 endif
 
-ifeq ($(T),vocore)
-  NAME:=Vonger_VoCore
+ifeq ($(T),vocore-8M)
+  NAME:=Vonger_VoCore-8M
   ARCH:=ramips
   SUBARCH:=rt305x
   TBUILD:=lede
   PROFILE:=rt5350-qmp-small-node
-  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-vocore-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-vocore-8M-squashfs-sysupgrade.bin
+endif
+
+ifeq ($(T),vocore-16M)
+  NAME:=Vonger_VoCore-16M
+  ARCH:=ramips
+  SUBARCH:=rt305x
+  TBUILD:=lede
+  PROFILE:=rt5350-qmp-small-node
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ramips-rt305x-vocore-16M-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),microwrt)
