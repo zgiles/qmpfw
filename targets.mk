@@ -235,10 +235,11 @@ endif
 ifeq ($(T),tl-wr841n-v10)
   NAME:=TP-Link_TL-WR841N-v10
   ARCH:=ar71xx
+  SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ar71xx_kstrip-qmp-tiny-node
-  IMAGE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-factory.bin
-  SYSUPGRADE:=bin/targets/$(ARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wr841-v10-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-842)
