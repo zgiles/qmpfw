@@ -289,8 +289,8 @@ ifeq ($(T),tl-wa7510n)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr3500-v1)
@@ -299,8 +299,8 @@ ifeq ($(T),tl-wdr3500-v1)
   SUBARCH:=generic
   TBUILD:=lede
   PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-sysupgrade.bin
+  IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-factory.bin
+  SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-sysupgrade.bin
 endif
 
 ifeq ($(T),tl-wdr3600)
