@@ -405,6 +405,7 @@ ifeq ($(T),vmware)
   NAME:=VMware_x86
   ARCH:=x86
   TBUILD:=lede
+  SUBARCH:=generic
   PROFILE:=vm-qmp-big-node
   IMAGE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-x86-generic-combined-ext4.vmdk
   SYSUPGRADE:=bin/targets/$(ARCH)/$(SUBARCH)/qmp-x86-generic-combined-ext4.vmdk
