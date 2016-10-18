@@ -40,8 +40,8 @@ SCRIPTS_DIR= scripts
 
 J ?= 1
 V ?= 0
-T ?= ar71xx
-MPT ?= ar71xx-generic-mp
+TBUILD ?= lede
+
 MAKE_SRC = -j$(J) V=$(V)
 
 IMAGEOPT ?= true
@@ -53,10 +53,10 @@ VERSION_CODE ?= Kalimotxo
 VERSION_NUMBER ?= trunk
 COMMUNITY ?= qMp
 EXTRA_PACKS =
+DISTLC = `echo $(VERSION_DIST) | tr A-Z a-z`
 
-include targets.mk mp-targets.mk
+include targets.mk
 
-PROFILE ?= ath-qmp-tiny-node
 TIMESTAMP = $(shell date +%Y%m%d-%H%M)
 
 #Checking if developer mode is enabled and if target is defined before
@@ -80,7 +80,7 @@ SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 
-.PHONY: checkout clean clean_qmp compile config kernel_menuconfig menuconfig mp-target-config list_archs list_targets post_build pre_build update
+.PHONY: checkout clean clean_qmp compile config kernel_menuconfig menuconfig list_archs list_targets post_build pre_build update
 
 define build_src
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
@@ -112,10 +112,34 @@ define checkout_lede_pkg_override
 endef
 
 define copy_config
-	@echo "Using profile $(PROFILE)"
-	cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"
-	-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true
+	$(if $(T), $(call copy_config_target),$(call copy_config_target))
+endef
+
+define copy_config_mptarget
+	$(if $(T),@echo "Using multi-profile $(ARCH)-$(SUBARCH) for target $(T)", @echo "Using multi-profile $(MPT)")
+
+	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
+	@for DEVICE in $(TINY); do \
+		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> $(CONFIG) ;\
+	done
+	@for DEVICE in $(SMALL); do \
+		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> $(CONFIG) ; \
+	done
+	@for DEVICE in $(BIG); do \
+		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> $(CONFIG) ; \
+	done
 	cd $(BUILD_PATH) && make defconfig
+endef
+
+define copy_config_target
+	@echo "Using target $(T)"
+
+	@#If the target is part of a multi-profile target, then switch to multi-profile compilation
+   $(if $(MPNAME), \
+		$(call copy_config_mptarget), \
+		cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"; \
+		-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true; \
+		cd $(BUILD_PATH) && make defconfig)
 endef
 
 define copy_config_obsolete
@@ -144,26 +168,6 @@ define menuconfig_owrt
 	make -C $(BUILD_PATH) menuconfig
 	mkdir -p $(MY_CONFIGS)/$(TARGET)
 	cp -f $(CONFIG) $(MY_CONFIGS)/$(TARGET)/config
-endef
-
-define mp-target-config
-   @echo "Using multi-profile $(MPT)"
-
-	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
-
-	@for DEVICE in $(TINY); do \
-		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> $(CONFIG) ;\
-	done
-
-	@for DEVICE in $(SMALL); do \
-		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> $(CONFIG) ; \
-	done
-
-	@for DEVICE in $(BIG); do \
-		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> $(CONFIG) ; \
-	done
-
-	cd $(BUILD_PATH) && make defconfig
 endef
 
 define kmenuconfig_owrt
@@ -214,8 +218,11 @@ define clean_pkg
 endef
 
 define target_error
-	@echo "You must specify target using T var (make T=alix build)"
+	@echo "You must specify either a single target, using the T variable (e.g.: make T=alix build),"
+	@echo "or a multi-profile target, using the MPT variable (e.g.: make MPT=ar71xx-generic build),"
+	@echo ""
 	@echo "To see avialable targets run: make list_targets"
+	@echo "To see avialable multi-profile target run: make list_mptargets"
 	@exit 1
 endef
 
@@ -248,12 +255,12 @@ all: build
 
 checkout: .checkout_qmp .checkout_lede .checkout_lede_pkg .checkout_lede_pkg_override
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call update_feeds,$(TBUILD)))
-	$(if $(wildcard .checkout_$(TBUILD)),,$(call mp-target-config))
+	$(if $(wildcard .checkout_$(TBUILD)),,$(call copy_config))
 	@touch .checkout_$(TBUILD)
 
 sync_config:
-	$(if $(MPTARGET),,$(call target_error))
-	$(if $(wildcard $(MY_CONFIGS)/$(MPTARGET_CONFIGS)), $(call copy_myconfig),$(call mp-target-config))
+	$(if $(MPTARGET)$(TARGET),,$(call target_error))
+	$(if $(wildcard $(MY_CONFIGS)/$(MPTARGET_CONFIGS)), $(call copy_myconfig),$(call copy_config))
 
 update: .checkout_lede_pkg .checkout_lede_pkg_override .checkout_qmp
 	$(if $(TBUILD),,$(call target_error))
@@ -273,9 +280,6 @@ update_feeds: update
 
 menuconfig: checkout sync_config
 	$(call menuconfig_owrt)
-
-mp-target-config:
-	$(call mp-target-config)
 
 kernel_menuconfig: checkout sync_config
 	$(call kmenuconfig_owrt)
@@ -301,7 +305,7 @@ list_targets:
 	@exit 0
 
 list_mptargets:
-		$(info $(MP_ARCHS))
+		$(info $(MP_AVAILABLE))
 		@exit 0
 
 target_name:
