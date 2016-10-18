@@ -1,6 +1,6 @@
 #    [qMp] firmware generator (http://qmp.cat)
- 
-#    Copyright (C) 2011-2015 Routek S.L. (http://routek.net)
+
+#    Copyright (C) 2011-2016 Routek S.L. (http://routek.net)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -41,6 +41,7 @@ SCRIPTS_DIR= scripts
 J ?= 1
 V ?= 0
 T ?= ar71xx
+MPT ?= ar71xx-generic-mp
 MAKE_SRC = -j$(J) V=$(V)
 
 IMAGEOPT ?= true
@@ -53,7 +54,11 @@ VERSION_NUMBER ?= trunk
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
-include targets.mk
+TINYPKG ?= qmp-tiny-node
+SMALLPKG ?= qmp-small-node
+BIGPKG ?= qmp-big-node
+
+include targets.mk mp-targets.mk
 
 PROFILE ?= ath-qmp-tiny-node
 TIMESTAMP = $(shell date +%Y%m%d-%H%M)
@@ -64,6 +69,7 @@ $(eval $(if $(DEV),QMP_GIT=$(QMP_GIT_RW),QMP_GIT=$(QMP_GIT_RO)))
 #Define TARGET_CONFIGS and TARGET
 $(eval $(if $(TARGET_MASTER),TARGET_CONFIGS=$(TARGET_MASTER),TARGET_CONFIGS=$(T)))
 $(eval $(if $(TARGET),,TARGET=$(T)))
+$(eval $(if $(MPTARGET),,MPTARGET=$(MPT)))
 
 #Define BUILD_PATH based on TBUILD (defined in targets.mk)
 $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
@@ -135,7 +141,7 @@ endef
 define update_feeds
 	@echo "Updating feed $(1)"
 	./$(BUILD_DIR)/$(1)/scripts/feeds update -a
-	
+
 	./$(BUILD_DIR)/$(1)/scripts/feeds install -a
 endef
 
@@ -143,6 +149,22 @@ define menuconfig_owrt
 	make -C $(BUILD_PATH) menuconfig
 	mkdir -p $(MY_CONFIGS)/$(TARGET)
 	cp -f $(CONFIG) $(MY_CONFIGS)/$(TARGET)/config
+endef
+
+define mp-target-config
+	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile mpconfig
+
+	@for DEVICE in $(TINY); do \
+		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> mpconfig ;\
+	done
+
+	@for DEVICE in $(SMALL); do \
+		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> mpconfig ; \
+	done
+
+	@for DEVICE in $(BIG); do \
+		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> mpconfig ; \
+	done
 endef
 
 define kmenuconfig_owrt
@@ -253,6 +275,9 @@ update_feeds: update
 
 menuconfig: checkout sync_config
 	$(call menuconfig_owrt)
+
+mp-target-config:
+	$(call mp-target-config)
 
 kernel_menuconfig: checkout sync_config
 	$(call kmenuconfig_owrt)
