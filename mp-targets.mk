@@ -9,6 +9,10 @@
 MP_ARCHS := ar71xx-generic-mp ramips-mt7620-mp
 TBUILD_LIST := lede
 
+TINYPKG ?= qmp-tiny-node
+SMALLPKG ?= qmp-small-node
+BIGPKG ?= qmp-big-node
+
 ifeq ($(MPT),ar71xx-generic-mp)
   TBUILD:=lede
   ARCH:=ar71xx

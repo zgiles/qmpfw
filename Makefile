@@ -22,10 +22,10 @@
 #	Roger Pueyo Centelles
 
 LEDE_SOURCE_CLONE = git clone http://git.lede-project.org/source.git
-LEDE_PKG_CLONE = git clone https://github.com/openwrt/packages.git
+LEDE_PKG_CLONE = git clone  https://git.lede-project.org/feed/packages.git
 
-QMP_GIT_RW = ssh://gitolite@qmp.cat:qmp.git
-QMP_GIT_RO = git://qmp.cat/qmp.git
+QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
+QMP_GIT_RO = git://dev.qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Kalimotxo
 QMP_RELEASE ?= trunk
@@ -54,10 +54,6 @@ VERSION_NUMBER ?= trunk
 COMMUNITY ?= qMp
 EXTRA_PACKS =
 
-TINYPKG ?= qmp-tiny-node
-SMALLPKG ?= qmp-small-node
-BIGPKG ?= qmp-big-node
-
 include targets.mk mp-targets.mk
 
 PROFILE ?= ath-qmp-tiny-node
@@ -84,8 +80,7 @@ SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 
-.PHONY: checkout update clean config menuconfig kernel_menuconfig list_targets pre_build compile post_build clean_qmp
-
+.PHONY: checkout clean clean_qmp compile config kernel_menuconfig menuconfig mp-target-config list_archs list_targets post_build pre_build update
 
 define build_src
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
@@ -111,7 +106,7 @@ define checkout_src
 	$(call copy_feeds_file,$(TBUILD))
 endef
 
-define checkout_owrt_pkg_override
+define checkout_lede_pkg_override
 	$(LEDE_PKG_CLONE) $(BUILD_DIR)/packages.$(TARGET)
 	sed -i -e "s|src-link packages .*|src-link packages `pwd`/$(BUILD_DIR)/packages.$(TARGET)|" $(BUILD_PATH)/feeds.conf
 endef
@@ -152,19 +147,23 @@ define menuconfig_owrt
 endef
 
 define mp-target-config
-	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile mpconfig
+   @echo "Using multi-profile $(MPT)"
+
+	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
 
 	@for DEVICE in $(TINY); do \
-		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> mpconfig ;\
+		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> $(CONFIG) ;\
 	done
 
 	@for DEVICE in $(SMALL); do \
-		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> mpconfig ; \
+		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> $(CONFIG) ; \
 	done
 
 	@for DEVICE in $(BIG); do \
-		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> mpconfig ; \
+		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> $(CONFIG) ; \
 	done
+
+	cd $(BUILD_PATH) && make defconfig
 endef
 
 define kmenuconfig_owrt
@@ -206,7 +205,7 @@ define clean_target
 	-rm -rf $(BUILD_PATH)
 	-rm -f .checkout_$(TBUILD)
 	-rm -rf $(BUILD_DIR)/packages.$(TARGET)
-	rm -f .checkout_owrt_pkg_override_$(TARGET)
+	rm -f .checkout_lede_pkg_override_$(TARGET)
 endef
 
 define clean_pkg
@@ -231,38 +230,37 @@ endef
 all: build
 
 .checkout_qmp:
-	-@[ "$(DEV)" == "1" ] && echo "Using developer enviroment"
 	git clone $(QMP_GIT) $(BUILD_DIR)/qmp
 	cd $(BUILD_DIR)/qmp; git checkout $(QMP_GIT_BRANCH); cd ..
 	@touch $@
 
-.checkout_owrt_pkg:
+.checkout_lede_pkg:
 	$(LEDE_PKG_CLONE) $(BUILD_DIR)/packages
 	@touch $@
 
-.checkout_owrt_pkg_override:
-	$(if $(filter $(origin LEDE_PKG_CLONE),override),$(if $(wildcard .checkout_owrt_pkg_override_$(TARGET)),,$(call checkout_owrt_pkg_override)),)
-	@touch .checkout_owrt_pkg_override_$(TARGET)
+.checkout_lede_pkg_override:
+	$(if $(filter $(origin LEDE_PKG_CLONE),override),$(if $(wildcard .checkout_lede_pkg_override_$(TARGET)),,$(call checkout_lede_pkg_override)),)
+	@touch .checkout_lede_pkg_override_$(TARGET)
 
-.checkout_owrt:
+.checkout_lede:
 	$(if $(TBUILD),,$(call target_error))
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call checkout_src))
 
-checkout: .checkout_qmp .checkout_owrt .checkout_owrt_pkg .checkout_owrt_pkg_override
+checkout: .checkout_qmp .checkout_lede .checkout_lede_pkg .checkout_lede_pkg_override
 	$(if $(wildcard .checkout_$(TBUILD)),,$(call update_feeds,$(TBUILD)))
-	$(if $(wildcard .checkout_$(TBUILD)),,$(call copy_config))
+	$(if $(wildcard .checkout_$(TBUILD)),,$(call mp-target-config))
 	@touch .checkout_$(TBUILD)
 
 sync_config:
-	$(if $(TARGET),,$(call target_error))
-	$(if $(wildcard $(MY_CONFIGS)/$(TARGET_CONFIGS)), $(call copy_myconfig),$(call copy_config))
+	$(if $(MPTARGET),,$(call target_error))
+	$(if $(wildcard $(MY_CONFIGS)/$(MPTARGET_CONFIGS)), $(call copy_myconfig),$(call mp-target-config))
 
-update: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_qmp
+update: .checkout_lede_pkg .checkout_lede_pkg_override .checkout_qmp
 	$(if $(TBUILD),,$(call target_error))
 	cd $(BUILD_DIR)/qmp && git pull
 	$(call copy_feeds_file)
 
-update_all: .checkout_owrt_pkg .checkout_owrt_pkg_override .checkout_qmp
+update_all: .checkout_lede_pkg .checkout_lede_pkg_override .checkout_qmp
 	@echo Updating qMp repository
 	cd $(BUILD_DIR)/qmp && git pull
 	@echo Updating feeds config files
@@ -290,18 +288,21 @@ clean_qmp:
 	for d in $(QMP_FEED)/*; do make $$d/clean ; done
 
 post_build: checkout
-	$(call post_build)
+		$(call post_build)
 
 pre_build: checkout
 	$(call pre_build)
 
 compile: checkout
-	$(if $(TARGET),$(call build_src))
-
+	$(if $(MPTARGET),$(call build_src))
 
 list_targets:
 	$(info $(HW_AVAILABLE))
 	@exit 0
+
+list_mptargets:
+		$(info $(MP_ARCHS))
+		@exit 0
 
 target_name:
 	$(info $(NAME))
