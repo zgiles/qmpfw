@@ -64,6 +64,7 @@ $(eval $(if $(DEV),QMP_GIT=$(QMP_GIT_RW),QMP_GIT=$(QMP_GIT_RO)))
 
 #Define TARGET_CONFIGS and TARGET
 $(eval $(if $(TARGET_MASTER),TARGET_CONFIGS=$(TARGET_MASTER),TARGET_CONFIGS=$(T)))
+$(eval $(if $(T),,TARGET_CONFIGS=$(MPT)))
 $(eval $(if $(TARGET),,TARGET=$(T)))
 $(eval $(if $(MPTARGET),,MPTARGET=$(MPT)))
 
@@ -112,10 +113,11 @@ define checkout_lede_pkg_override
 endef
 
 define copy_config
-	$(if $(T), $(call copy_config_target),$(call copy_config_target))
+	$(if $(T), $(call copy_config_target),$(call copy_config_mptarget))
 endef
 
 define copy_config_mptarget
+	@echo "Using multi-profile target $(MPT)"
 	$(if $(T),@echo "Using multi-profile $(ARCH)-$(SUBARCH) for target $(T)", @echo "Using multi-profile $(MPT)")
 
 	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
@@ -260,7 +262,7 @@ checkout: .checkout_qmp .checkout_lede .checkout_lede_pkg .checkout_lede_pkg_ove
 
 sync_config:
 	$(if $(MPTARGET)$(TARGET),,$(call target_error))
-	$(if $(wildcard $(MY_CONFIGS)/$(MPTARGET_CONFIGS)), $(call copy_myconfig),$(call copy_config))
+	$(if $(wildcard $(MY_CONFIGS)/$(TARGET_CONFIGS)), $(call copy_myconfig),$(call copy_config))
 
 update: .checkout_lede_pkg .checkout_lede_pkg_override .checkout_qmp
 	$(if $(TBUILD),,$(call target_error))
