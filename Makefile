@@ -168,8 +168,8 @@ endef
 
 define menuconfig_owrt
 	make -C $(BUILD_PATH) menuconfig
-	mkdir -p $(MY_CONFIGS)/$(TARGET)
-	cp -f $(CONFIG) $(MY_CONFIGS)/$(TARGET)/config
+	$(if $(T), mkdir -p $(MY_CONFIGS)/$(TARGET),mkdir -p $(MY_CONFIGS)/$(MPTARGET))
+	$(if $(T), cp -f $(CONFIG) $(MY_CONFIGS)/$(TARGET)/config, cp -f $(CONFIG) $(MY_CONFIGS)/$(MPTARGET)/config)
 endef
 
 define kmenuconfig_owrt
