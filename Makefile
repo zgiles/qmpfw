@@ -25,7 +25,7 @@ LEDE_SOURCE_CLONE = git clone http://git.lede-project.org/source.git
 LEDE_PKG_CLONE = git clone  https://git.lede-project.org/feed/packages.git
 
 QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
-QMP_GIT_RO = git://dev.qmp.cat/qmp.git
+QMP_GIT_RO = http://dev.qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
 QMP_CODENAME ?= Kalimotxo
 QMP_RELEASE ?= trunk
@@ -53,7 +53,7 @@ VERSION_CODE ?= Kalimotxo
 VERSION_NUMBER ?= trunk
 COMMUNITY ?= qMp
 EXTRA_PACKS =
-DISTLC = `echo $(VERSION_DIST) | tr A-Z a-z`
+DISTCL = `echo $(VERSION_DIST) | tr A-Z a-z`
 
 include targets.mk
 
@@ -73,9 +73,9 @@ $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
 BUILD_PATH=$(BUILD_DIR)/$(TBUILD)
 
 #Getting output image paths and names
-IMAGE_PATH := $(shell echo $(IMAGE) | awk  '{print $$1}')
+IMAGE_PATH := $(shell echo target/$(ARCH)/$(SUBARCH)/$(IMAGE) | awk  '{print $$1}')
 IM_NAME := $(shell echo $(IMAGE) | awk '{print $$2}')
-SIMAGE_PATH := $(shell echo $(SYSUPGRADE) | awk '{print $$1}')
+SIMAGE_PATH := $(shell echo target/$(ARCH)/$(SUBARCH)/$(SYSUPGRADE) | awk '{print $$1}')
 SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 
 CONFIG = $(BUILD_PATH)/.config
