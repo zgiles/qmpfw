@@ -73,9 +73,9 @@ $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
 BUILD_PATH=$(BUILD_DIR)/$(TBUILD)
 
 #Getting output image paths and names
-IMAGE_PATH := $(shell echo target/$(ARCH)/$(SUBARCH)/$(IMAGE) | awk  '{print $$1}')
+IMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(FACTORY) | awk  '{print $$1}')
 IM_NAME := $(shell echo $(IMAGE) | awk '{print $$2}')
-SIMAGE_PATH := $(shell echo target/$(ARCH)/$(SUBARCH)/$(SYSUPGRADE) | awk '{print $$1}')
+SIMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(SYSUPGRADE) | awk '{print $$1}')
 SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 
 CONFIG = $(BUILD_PATH)/.config
