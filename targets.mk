@@ -34,7 +34,7 @@ TBUILD_LIST := lede
 DISTLEGACY:=lede
 
 MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x
-HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket rs rspro mc-mac1200r tl-2543-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 tl-wr841-v10 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt wrtnode wt3020-4M wt3020-8M miwifi-mini wl-wn575a3 lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
+HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket-m rs rspro mc-mac1200r tl-2543-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 tl-wr841-v10 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt wrtnode wt3020-4M wt3020-8M miwifi-mini wl-wn575a3 lamobo-r1 ar71xx-generic-ib ath25-generic-ib brcm2708-bcm2708-ib brcm2708-bcm2709-ib brcm2708-bcm2710-ib mpc85xx-generic-ib ramips-mt7620-ib ramips-mt7621-ib ramips-rt305x-ib sunxi-generic-ib x86-generic-ib x86-geode-ib
 
 ifeq ($(MPT),ath25-generic)
   TBUILD:=lede
@@ -270,7 +270,7 @@ ifeq ($(T),pico2)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
-ifeq ($(T),rocket)
+ifeq ($(T),rocket-m)
   NAME:=Ubiquiti_Rocket-M
   ARCH:=ar71xx
   SUBARCH:=generic
