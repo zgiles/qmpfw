@@ -1,4 +1,5 @@
 .checkout*
+.build_src*
 dl
 images
 build

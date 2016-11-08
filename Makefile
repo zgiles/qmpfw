@@ -86,7 +86,15 @@ KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 define build_src
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
 	$(eval REV_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git --no-pager log -n 1 --oneline|cut -d " " -f 1))
-	make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT) QMP_CODENAME=$(QMP_CODENAME) QMP_RELEASE=$(QMP_RELEASE)
+
+	@if [ ! $(REBUILD) -a $(MPNAME) -a -f .build_src_$(ARCH)-$(SUBARCH) ]; then \
+		echo Multi-profile target $(ARCH)-$(SUBARCH) already compiled; \
+	else \
+		echo Compiling multi-profile target $(ARCH)-$(SUBARCH); \
+		make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT) QMP_CODENAME=$(QMP_CODENAME) QMP_RELEASE=$(QMP_RELEASE); \
+		touch .build_src_$(ARCH)-$(SUBARCH); \
+   fi
+
 endef
 
 define copy_feeds_file
@@ -117,7 +125,6 @@ define copy_config
 endef
 
 define copy_config_mptarget
-	@echo "Using multi-profile target $(MPT)"
 	$(if $(T),@echo "Using multi-profile $(ARCH)-$(SUBARCH) for target $(T)", @echo "Using multi-profile $(MPT)")
 
 	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
@@ -138,6 +145,7 @@ define copy_config_target
 
 	@#If the target is part of a multi-profile target, then switch to multi-profile compilation
    $(if $(MPNAME), \
+		@echo "Target $(T) is part of multi-profile target $(ARCH)-$(SUBARCH)"
 		$(call copy_config_mptarget), \
 		cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"; \
 		-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true; \
@@ -184,6 +192,10 @@ define pre_build
 endef
 
 define post_build
+	$(if $(T), $(call post_build_target))
+endef
+
+define post_build_target
 	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
 	$(if $(IM_NAME),,$(eval IM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin))
 	$(if $(SIM_NAM),,$(eval SIM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin))
