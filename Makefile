@@ -300,7 +300,7 @@ pre_build: checkout
 	$(call pre_build)
 
 compile: checkout
-	$(if $(MPTARGET),$(call build_src))
+	$(if $(MPTARGET),$(call build_src),$(call build_src))
 
 list_targets:
 	$(info $(HW_AVAILABLE))
