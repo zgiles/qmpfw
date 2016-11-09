@@ -92,7 +92,7 @@ ifeq ($(MPT),ramips-mt7620)
   SUBARCH:=mt7620
   DEVPKG:=CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_$(DEVICE)
   TINY:=wt3020-4M
-  SMALL:=cf-wr800n microwrt wrtnode wt3020-8M miwifi-mini dir-810l
+  SMALL:=cf-wr800n dir-810l microwrt miwifi-mini wrtnode wt3020-8M zbt-ape522ii
   BIG:=
 endif
 
@@ -599,17 +599,6 @@ ifeq ($(T),wl-wn575a3)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
-ifeq ($(T),wrtnode)
-  NAME:=WRTnode_WRTnode
-  ARCH:=ramips
-  SUBARCH:=mt7620
-  TBUILD:=lede
-  PROFILE:=qmp-small-node
-  MPNAME:=wrtnode
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
-endif
-
 ifeq ($(T),wt1520-4M)
   NAME:=Nexx_WT1520-4M
   ARCH:=ramips
@@ -630,6 +619,39 @@ ifeq ($(T),wt1520-8M)
   MPNAME:=wt1520-8M
   FACTORY:=$(DISTLEGACY)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTLEGACY)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+endif
+
+ifeq ($(T),dir-810l)
+  NAME:=D-Link_DIR-810L
+  ARCH:=ramips
+  SUBARCH:=mt7620
+  TBUILD:=lede
+  PROFILE:=qmp-small-node
+  MPNAME:=dir-810l
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+endif
+
+ifeq ($(T),miwifi-mini)
+  NAME:=Xiaomi_MiWiFi-Mini
+  ARCH:=ramips
+  SUBARCH:=mt7620
+  TBUILD:=lede
+  PROFILE:=qmp-small-node
+  MPNAME:=miwifi-mini
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+endif
+
+ifeq ($(T),wrtnode)
+  NAME:=WRTnode_WRTnode
+  ARCH:=ramips
+  SUBARCH:=mt7620
+  TBUILD:=lede
+  PROFILE:=qmp-small-node
+  MPNAME:=wrtnode
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
 ifeq ($(T),wt3020-4M)
@@ -654,24 +676,13 @@ ifeq ($(T),wt3020-8M)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
-ifeq ($(T),miwifi-mini)
-  NAME:=Xiaomi_MiWiFi-Mini
+ifeq ($(T),zbt-ape522ii)
+  NAME:=ZBT_APE522II
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
   PROFILE:=qmp-small-node
-  MPNAME:=miwifi-mini
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
-endif
-
-ifeq ($(T),dir-810l)
-  NAME:=D-Link_DIR-810L
-  ARCH:=ramips
-  SUBARCH:=mt7620
-  TBUILD:=lede
-  PROFILE:=qmp-small-node
-  MPNAME:=dir-810l
+  MPNAME:=zbt-ape522ii
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
