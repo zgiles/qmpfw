@@ -750,3 +750,5 @@ ifeq ($(T),x86-64-ib)
   MPNAME:=
   IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
+
+DEVPKG ?= CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_$(DEVICE)=$PROFILE
