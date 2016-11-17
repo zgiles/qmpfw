@@ -144,7 +144,7 @@ ifeq ($(T),alix)
   TBUILD:=lede
   PROFILE:=x86-qmp-big-node
   MPNAME:=
-  COMBINEDSQUASH:=combined-squashfs.bin
+  COMBINEDSQUASH:=combined-squashfs.img
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
 endif
