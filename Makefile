@@ -147,8 +147,9 @@ define copy_config_target
    $(if $(MPNAME), \
 		@echo "Target $(T) is part of multi-profile target $(ARCH)-$(SUBARCH)"
 		$(call copy_config_mptarget), \
-		cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"; \
-		-[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true; \
+		@echo "Target $(T) is not part of a multi-profile target"
+		@cp -f $(CONFIG_DIR)/$(PROFILE) $(CONFIG) || echo "WARNING: Config file not found!"; \
+		[ -f $(CONFIG_DIR)/targets/$(TARGET) ] && cat $(CONFIG_DIR)/targets/$(TARGET) >> $(CONFIG) || true; \
 		cd $(BUILD_PATH) && make defconfig)
 endef
 
@@ -158,13 +159,13 @@ define copy_config_obsolete
 	cd $(BUILD_PATH) && ./scripts/diffconfig.sh > .config.tmp
 	cp -f $(BUILD_PATH)/.config.tmp $(BUILD_PATH)/.config
 	cd $(BUILD_PATH) && make defconfig
-	-[ -f $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config ] && cat $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG)
+	-@if [ -f $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config ]; then cat $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG); fi
 endef
 
 define copy_myconfig
 	@echo "Syncronizing configuration from previous one"
 	@cp -f $(MY_CONFIGS)/$(TARGET_CONFIGS)/config $(CONFIG) || echo "WARNING: Config file not found in $(MY_CONFIGS)!"
-	-@[ -f $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config ] && cat $(MY_CONFIGS)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG)
+	-@if [ -f $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config ]; then cat $(CONFIG_DIR)/$(TARGET_CONFIGS)/kernel_config >> $(CONFIG); fi
 endef
 
 define update_feeds
