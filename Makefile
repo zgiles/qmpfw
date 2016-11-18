@@ -127,7 +127,7 @@ endef
 define copy_config_mptarget
 	$(if $(T),@echo "Using multi-profile $(ARCH)-$(SUBARCH) for target $(T)", @echo "Using multi-profile $(MPT)")
 
-	cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
+	@cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
 	@for DEVICE in $(TINY); do \
 		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> $(CONFIG) ;\
 	done
