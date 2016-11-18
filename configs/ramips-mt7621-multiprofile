@@ -7,3 +7,4 @@ CONFIG_PACKAGE_qmp-system=y
 CONFIG_PACKAGE_qmp-tiny-node=m
 CONFIG_PACKAGE_qmp-small-node=m
 CONFIG_PACKAGE_qmp-big-node=m
+CONFIG_PACKAGE_luci-app-qos=m
