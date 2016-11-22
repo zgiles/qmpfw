@@ -21,39 +21,49 @@
 #	Agustí Moll
 #	Roger Pueyo Centelles
 
+# Base distribution sources clone URLs
 LEDE_SOURCE_CLONE = git clone http://git.lede-project.org/source.git
-LEDE_PKG_CLONE = git clone  https://git.lede-project.org/feed/packages.git
+LEDE_PKG_CLONE = git clone https://git.lede-project.org/feed/packages.git
 
+# qMp packages source clone URLs and settings
 QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
 QMP_GIT_RO = http://dev.qmp.cat/qmp.git
 QMP_GIT_BRANCH ?= testing
-QMP_CODENAME ?= Kalimotxo
-QMP_RELEASE ?= trunk
 QMP_FEED = package/feeds/qmp_packages
 
+# Distribution naming
+VERSION_DIST ?= qMp
+VERSION_MANUFACTURER ?= "Quick Mesh Project"
+VERSION_MANUFACTURER_URL ?= https://www.qmp.cat
+VERSION_BUG_URL ?= https://dev.qmp.cat/projects/qmp/issues
+VERSION_SUPPORT_URL ?= https://dev.qmp.cat/projects/qmp/wiki
+
+# Distribution versioning (e.g. Ratafia 2.0, Clearance testing, Kalimotxo trunk)
+VERSION_NICK ?= Kalimotxo
+VERSION_NUMBER ?= trunk
+
+# Distribution repository
+VERSION_REPO="http://fw.qmp.cat/Releases/%v-%N"
+
+# Image customization
+IMAGEOPT ?= true
+VERSIONOPT ?= true
+EXTRA_PACKAGES ?=
+QMP_COMMUNITY ?=
+DISTCL = `echo $(VERSION_DIST) | tr A-Z a-z`
+
+#Compilation options
+J ?= 1
+V ?= 0
+TBUILD ?= lede
 BUILD_DIR = build
 CONFIG_DIR = configs
 MY_CONFIGS = $(BUILD_DIR)/configs
 IMAGES = images
 SHELL = bash
 SCRIPTS_DIR= scripts
-
-J ?= 1
-V ?= 0
-TBUILD ?= lede
-
 MAKE_SRC = -j$(J) V=$(V)
 
-IMAGEOPT ?= true
-VERSIONOPT ?= true
-VERSION_REPO ?= http://downloads.lede-project.org/snapshots
-VERSION_DIST ?= qMp
-VERSION_NICK ?= Kalimotxo
-VERSION_CODE ?= Kalimotxo
-VERSION_NUMBER ?= trunk
-COMMUNITY ?= qMp
-EXTRA_PACKS =
-DISTCL = `echo $(VERSION_DIST) | tr A-Z a-z`
 
 include targets.mk
 
@@ -84,14 +94,13 @@ KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
 .PHONY: checkout clean clean_qmp compile config kernel_menuconfig menuconfig list_archs list_targets post_build pre_build update
 
 define build_src
-	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
 	$(eval REV_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git --no-pager log -n 1 --oneline|cut -d " " -f 1))
 
 	@if [ ! $(REBUILD) -a $(MPNAME) -a -f .build_src_$(ARCH)-$(SUBARCH) ]; then \
 		echo Multi-profile target $(ARCH)-$(SUBARCH) already compiled; \
 	else \
 		echo Compiling multi-profile target $(ARCH)-$(SUBARCH); \
-		make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_CODE=$(VERSION_CODE) BRANCH_GIT=$(BRANCH_GIT) REV_GIT=$(REV_GIT) QMP_CODENAME=$(QMP_CODENAME) QMP_RELEASE=$(QMP_RELEASE); \
+		make -C $(BUILD_PATH) $(MAKE_SRC) IMAGEOPT=$(IMAGEOPT) VERSIONOPT=$(VERSIONOPT) VERSION_REPO=$(VERSION_REPO) VERSION_DIST=$(VERSION_DIST) VERSION_NICK=$(VERSION_NICK) VERSION_NUMBER=$(VERSION_NUMBER) VERSION_MANUFACTURER=$(VERSION_MANUFACTURER) VERSION_MANUFACTURER_URL=$(VERSION_MANUFACTURER_URL) VERSION_BUG_URL=$(VERSION_BUG_URL) VERSION_SUPPORT_URL=$(VERSION_SUPPORT_URL) BRANCH_GIT=$(QMP_GIT_BRANCH) REV_GIT=$(REV_GIT) QMP_CODENAME=$(VERSION_NICK) QMP_RELEASE=$(VERSION_NUMBER); \
 		touch .build_src_$(ARCH)-$(SUBARCH); \
    fi
 
@@ -189,7 +198,7 @@ endef
 
 define pre_build
 	@echo "Executing PRE_BUILD scripts"
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) PRE_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKAGESS)) )
 endef
 
 define post_build
@@ -197,9 +206,8 @@ define post_build
 endef
 
 define post_build_target
-	$(eval BRANCH_GIT=$(shell git --git-dir=$(BUILD_DIR)/qmp/.git branch|grep ^*|cut -d " " -f 2))
-	$(if $(IM_NAME),,$(eval IM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin))
-	$(if $(SIM_NAM),,$(eval SIM_NAME=$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin))
+	$(if $(QMP_COMMUNITY),$(if $(IM_NAM),,$(eval IM_NAME=$(VERSION_DIST)-$(QMP_COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin)),$(if $(IM_NAM),,$(eval IM_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin)))
+	$(if $(QMP_COMMUNITY),$(if $(SIM_NAM),,$(eval SIM_NAME=$(VERSION_DIST)-$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin)),$(if $(SIM_NAM),,$(eval SIM_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin)))
 	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
 	mkdir -p $(IMAGES)
 	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
@@ -210,7 +218,7 @@ define post_build_target
 	@echo $(IM_NAME)
 	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
 	@echo "Executing POST_BUILD scripts"
-	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKS)) )
+	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKAGESS)) )
 	@echo "qMp firmware compiled, you can find output files in $(IMAGES) directory."
 endef
 
