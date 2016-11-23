@@ -262,7 +262,7 @@ ifeq ($(T),rocket-m-xw)
   TBUILD:=lede
   PROFILE:=qmp-small-node
   MPNAME:=ubnt-rocket-m-xw
-  IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
@@ -528,7 +528,7 @@ ifeq ($(T),unifi-ap)
   TBUILD:=lede
   PROFILE:=qmp-small-node
   MPNAME:=ubnt-unifi
-  IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
@@ -539,7 +539,7 @@ ifeq ($(T),uap-pro)
   TBUILD:=lede
   PROFILE:=qmp-small-node
   MPNAME:=ubnt-uap-pro
-  IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
