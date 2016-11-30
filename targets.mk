@@ -20,16 +20,18 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
-COMBINEDEXT4IMG := combined-ext4.img
+COMBINEDEXT4IMG := combined-ext4.img.gz
 COMBINEDEXT4VDI := combined-ext4.vdi
 COMBINEDEXT4VMDK := combined-ext4.vmdk
 COMBINEDSQUASH := combined-squashfs.bin
-COMBINEDSQUASHIMG := combined-squashfs.img
+COMBINEDSQUASHIMG := combined-squashfs.img.gz
 COMBINEDSQUASHVDI := combined-squashfs.vdi
 COMBINEDSQUASHVMDK := combined-squashfs.vmdk
 SDCARDVFATEXT4 := sdcard-vfat-ext4.img
 SQUASHFACTORY := squashfs-factory.bin
 SQUASHSYSUPGRADE := squashfs-sysupgrade.bin
+
+BINEXT := bin
 
 TINYPKG ?= qmp-tiny-node
 SMALLPKG ?= qmp-small-node
@@ -183,6 +185,7 @@ ifeq ($(T),alix)
   MPNAME:=x86-geode
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
+	BINEXT=img.gz
 endif
 
 ifeq ($(T),x86)
@@ -193,6 +196,7 @@ ifeq ($(T),x86)
   MPNAME:=x86
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
+	BINEXT=img.gz
 endif
 
 ifeq ($(T),soekris45xx)
@@ -203,6 +207,7 @@ ifeq ($(T),soekris45xx)
   MPNAME:=soekris45xx
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
+	BINEXT=img.gz
 endif
 
 ifeq ($(T),bullet)
@@ -551,6 +556,7 @@ ifeq ($(T),vbox)
   MPNAME:=vbox
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVDI)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VDI)
+	BINEXT=vdi
 endif
 
 ifeq ($(T),vmware)
@@ -561,6 +567,7 @@ ifeq ($(T),vmware)
   MPNAME:=vmware
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVMDK)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VMDK)
+	BINEXT=vmdk
 endif
 
 ifeq ($(T),vocore-8M)
@@ -690,8 +697,9 @@ ifeq ($(T),kvm)
   SUBARCH:=generic
   TBUILD:=lede
   MPNAME:=kvm
-	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVDI)
-	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VDI)
+	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
+	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
+	BINEXT=img.gz
 endif
 
 ifeq ($(T),sunxi-generic-ib)

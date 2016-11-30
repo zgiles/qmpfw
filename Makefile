@@ -83,10 +83,14 @@ $(eval $(if $(TBUILD),,TBUILD=$(TARGET)))
 BUILD_PATH=$(BUILD_DIR)/$(TBUILD)
 
 #Getting output image paths and names
-IMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(FACTORY) | awk  '{print $$1}')
-IM_NAME := $(shell echo $(IMAGE) | awk '{print $$2}')
-SIMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(SYSUPGRADE) | awk '{print $$1}')
-SIM_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
+EXT4IMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(EXT4IMAGE) | awk  '{print $$1}')
+EXT4IMAGE_NAME := $(shell echo $(EXT4IMAGE) | awk '{print $$2}')
+FACTORY_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(FACTORY) | awk  '{print $$1}')
+FACTORY_NAME := $(shell echo $(FACTORY) | awk '{print $$2}')
+SQUASHIMAGE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(SQUASHIMAGE) | awk  '{print $$1}')
+SQUASHIMAGE_NAME := $(shell echo $(SQUASHIMAGE) | awk '{print $$2}')
+SYSUPGRADE_PATH := $(shell echo bin/targets/$(ARCH)/$(SUBARCH)/$(SYSUPGRADE) | awk '{print $$1}')
+SYSUPGRADE_NAME := $(shell echo $(SYSUPGRADE) | awk '{print $$2}')
 
 CONFIG = $(BUILD_PATH)/.config
 KCONFIG = $(BUILD_PATH)/target/linux/$(ARCH)/config-*
@@ -206,17 +210,24 @@ define post_build
 endef
 
 define post_build_target
-	$(if $(QMP_COMMUNITY),$(if $(IM_NAM),,$(eval IM_NAME=$(VERSION_DIST)-$(QMP_COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin)),$(if $(IM_NAM),,$(eval IM_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).bin)))
-	$(if $(QMP_COMMUNITY),$(if $(SIM_NAM),,$(eval SIM_NAME=$(VERSION_DIST)-$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin)),$(if $(SIM_NAM),,$(eval SIM_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).bin)))
-	$(eval COMP=$(shell ls $(BUILD_PATH)/$(IMAGE_PATH) 2>/dev/null | grep -c \\.gz))
+	$(if $(QMP_COMMUNITY),$(if $(EXT4IMAGE_NAME),,$(eval EXT4IMAGE_NAME=$(VERSION_DIST)-$(QMP_COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_ext4_$(TIMESTAMP).$(BINEXT))),$(if $(EXT4IMAGE_NAME),,$(eval EXT4IMAGE_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_ext4_$(TIMESTAMP).$(BINEXT))))
+	$(if $(QMP_COMMUNITY),$(if $(FACTORY_NAME),,$(eval FACTORY_NAME=$(VERSION_DIST)-$(QMP_COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).$(BINEXT))),$(if $(FACTORY_NAME),,$(eval FACTORY_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_factory_$(TIMESTAMP).$(BINEXT))))
+	$(if $(QMP_COMMUNITY),$(if $(SQUASHIMAGE_NAME),,$(eval SQUASHIMAGE_NAME=$(VERSION_DIST)-$(QMP_COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_squashfs_$(TIMESTAMP).$(BINEXT))),$(if $(SQUASHIMAGE_NAME),,$(eval SQUASHIMAGE_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_squashfs_$(TIMESTAMP).$(BINEXT))))
+	$(if $(QMP_COMMUNITY),$(if $(SYSUPGRADE_NAME),,$(eval SYSUPGRADE_NAME=$(VERSION_DIST)-$(COMMUNITY)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).$(BINEXT))),$(if $(SYSUPGRADE_NAME),,$(eval SYSUPGRADE_NAME=$(VERSION_DIST)_$(VERSION_NUMBER)-$(VERSION_NICK)_$(NAME)_sysupgrade_$(TIMESTAMP).$(BINEXT))))
+
 	mkdir -p $(IMAGES)
-	-@[ $(COMP) -eq 1 ] && gunzip $(BUILD_PATH)/$(IMAGE_PATH) -c > $(IMAGES)/$(IM_NAME)
-	-@[ $(COMP) -ne 1 -a -f $(BUILD_PATH)/$(IMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(IMAGE_PATH) $(IMAGES)/$(IM_NAME)
-	-@[ $(COMP) -eq 1 -a -n "$(SYSUPGRADE)" ] && gunzip $(BUILD_PATH)/$(SIMAGE_PATH) -c > $(IMAGES)/$(SIM_NAME)
-	-@[ $(COMP) -ne 1 -a -n "$(SYSUPGRADE)" ] && cp -f $(BUILD_PATH)/$(SIMAGE_PATH) $(IMAGES)/$(SIM_NAME)
-	@[ -f $(IMAGES)/$(IM_NAME) ] || echo No output image configured in targets.mk
-	@echo $(IM_NAME)
-	$(if $(SYSUPGRADE),@echo $(SIM_NAME))
+	-@[ -f $(BUILD_PATH)/$(EXT4IMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(EXT4IMAGE_PATH) $(IMAGES)/$(EXT4IMAGE_NAME)
+	-@[ -f $(BUILD_PATH)/$(FACTORY_PATH) ] && cp -f $(BUILD_PATH)/$(FACTORY_PATH) $(IMAGES)/$(FACTORY_NAME)
+	-@[ -f $(BUILD_PATH)/$(SQUASHIMAGE_PATH) ] && cp -f $(BUILD_PATH)/$(SQUASHIMAGE_PATH) $(IMAGES)/$(SQUASHIMAGE_NAME)
+	-@[ -f $(BUILD_PATH)/$(SYSUPGRADE_PATH) ] && cp -f $(BUILD_PATH)/$(SYSUPGRADE_PATH) $(IMAGES)/$(SYSUPGRADE_NAME)
+	@[ -f $(IMAGES)/$(EXT4IMAGE_NAME) -o -f $(IMAGES)/$(FACTORY_NAME) -o -f $(IMAGES)/$(SQUASHIMAGE_NAME) -o -f $(IMAGES)/$(SYSUPGRADE_NAME) ] || echo No output image configured in targets.mk
+
+	@echo "Generated images:"
+	$(if $(EXT4IMAGE),@echo $(EXT4IMAGE_NAME))
+	$(if $(FACTORY),@echo $(FACTORY_NAME))
+	$(if $(SQUASHIMAGE),@echo $(SQUASHIMAGE_NAME))
+	$(if $(SYSUPGRADE),@echo $(SYSUPGRADE_NAME))
+
 	@echo "Executing POST_BUILD scripts"
 	$(foreach SCRIPT, $(wildcard $(SCRIPTS_DIR)/*.script), $(shell $(SCRIPT) POST_BUILD $(TBUILD) $(TARGET) $(EXTRA_PACKAGESS)) )
 	@echo "qMp firmware compiled, you can find output files in $(IMAGES) directory."
