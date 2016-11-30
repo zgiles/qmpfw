@@ -1,0 +1,14 @@
+CONFIG_TARGET_mpc85xx=y
+CONFIG_TARGET_mpc85xx_generic=y
+CONFIG_PACKAGE_qmp-system=y
+CONFIG_PACKAGE_qmp-tiny-node=m
+CONFIG_PACKAGE_qmp-small-node=m
+CONFIG_PACKAGE_qmp-big-node=y
+CONFIG_PACKAGE_luci-app-qos=m
+CONFIG_PACKAGE_luci-app-sqm=m
+CONFIG_PACKAGE_sqm-scripts=m
+CONFIG_PACKAGE_sqm-scripts-extra=m
+CONFIG_PACKAGE_tc=m
+CONFIG_PACKAGE_kmod-sched=m
+CONFIG_PACKAGE_kmod-sched-cake=m
+CONFIG_PACKAGE_ppp=m

@@ -86,6 +86,17 @@ ifeq ($(MPT),brcm2708-bcm2710)
   BIG:=rpi-3
 endif
 
+#This architecture is not really multi-profile, but has only one device
+ifeq ($(MPT),mpc85xx-generic)
+  TBUILD:=lede
+  ARCH:=mpc85xx
+  SUBARCH:=generic
+  DEVPKG:=
+  TINY:=
+  SMALL:=
+  BIG:=
+endif
+
 ifeq ($(MPT),ramips-mt7620)
   TBUILD:=lede
   ARCH:=ramips
@@ -471,10 +482,10 @@ ifeq ($(T),tl-wdr4900-v1)
   ARCH:=mpc85xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=mpc85xx-qmp-big-node
-  MPNAME:=
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(T)-$(SQUASHFACTORY)
-  SYSUPGRADE:=$(DISTCL)--$(ARCH)-$(SUBARCH)-$(T)-$(SQUASHSYSUPGRADE)
+  PROFILE:=qmp-big-node
+  MPNAME:=tl-wdr4900-v1
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
+  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
 ifeq ($(T),tl-wr743nd-v1)
