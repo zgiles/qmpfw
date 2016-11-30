@@ -20,7 +20,13 @@
 # Any option defined in Makefile can be overrided from here, for instance
 #  override OWRT_SVN = svn://mysvn.com/owrt
 
+COMBINEDEXT4IMG := combined-ext4.img
+COMBINEDEXT4VDI := combined-ext4.vdi
+COMBINEDEXT4VMDK := combined-ext4.vmdk
 COMBINEDSQUASH := combined-squashfs.bin
+COMBINEDSQUASHIMG := combined-squashfs.img
+COMBINEDSQUASHVDI := combined-squashfs.vdi
+COMBINEDSQUASHVMDK := combined-squashfs.vmdk
 SDCARDVFATEXT4 := sdcard-vfat-ext4.img
 SQUASHFACTORY := squashfs-factory.bin
 SQUASHSYSUPGRADE := squashfs-sysupgrade.bin
@@ -34,7 +40,7 @@ TBUILD_LIST := lede
 DISTLEGACY:=lede
 
 MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x x86-geode
-HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket-m rs rspro mc-mac1200r tl-2543-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 tl-wr841-v10 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt miwifi-mini wl-wn575a3 wrtnode wt3020-4M wt3020-8M zbt-ape522ii lamobo-r1 mpc85xx-generic-ib sunxi-generic-ib x86-generic-ib
+HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket-m rs rspro mc-mac1200r tl-2543-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 tl-wr841-v10 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt miwifi-mini wl-wn575a3 wrtnode wt3020-4M wt3020-8M zbt-ape522ii lamobo-r1 sunxi-generic-ib
 
 ifeq ($(MPT),ath25-generic)
   TBUILD:=lede
@@ -137,11 +143,23 @@ ifeq ($(MPT),ramips-rt305x)
   BIG:=
 endif
 
+#This architecture is not really multi-profile, but generates all images
+ifeq ($(MPT),x86-generic)
+  TBUILD:=lede
+  ARCH:=x86
+  SUBARCH:=generic
+  DEVPKG:=
+  TINY:=
+  SMALL:=
+  BIG:=
+endif
+
+#This architecture is not really multi-profile, but has only one device
 ifeq ($(MPT),x86-geode)
   TBUILD:=lede
   ARCH:=x86
   SUBARCH:=geode
-  DEVPKG:=CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_
+  DEVPKG:=
   TINY:=
   SMALL:=
   BIG:=
@@ -163,9 +181,8 @@ ifeq ($(T),alix)
   SUBARCH:=geode
   TBUILD:=lede
   MPNAME:=x86-geode
-  COMBINEDSQUASH:=combined-squashfs.img
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
 endif
 
 ifeq ($(T),x86)
@@ -173,10 +190,9 @@ ifeq ($(T),x86)
   ARCH:=x86
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=x86-qmp-big-node
-  MPNAME:=
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
+  MPNAME:=x86
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
 endif
 
 ifeq ($(T),soekris45xx)
@@ -184,10 +200,9 @@ ifeq ($(T),soekris45xx)
   ARCH:=x86
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=x86-qmp-big-node
-  MPNAME:=
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASH)
+  MPNAME:=soekris45xx
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHIMG)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4IMG)
 endif
 
 ifeq ($(T),bullet)
@@ -195,7 +210,6 @@ ifeq ($(T),bullet)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-bullet-m
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -206,7 +220,6 @@ ifeq ($(T),cf-wr800n)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=cf-wr800n
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -217,7 +230,6 @@ ifeq ($(T),nsm2)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-nano-m
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -228,7 +240,6 @@ ifeq ($(T),nsm5)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-nano-m
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -239,7 +250,6 @@ ifeq ($(T),nsm5-xw)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-nano-m-xw
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -250,7 +260,6 @@ ifeq ($(T),nslm5-xw)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-loco-m-xw
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -271,7 +280,6 @@ ifeq ($(T),rocket-m-xw)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-rocket-m-xw
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -282,7 +290,6 @@ ifeq ($(T),pico2)
   ARCH:=ath25
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=ubnt2-pico2
   BUILD_PATH:=$(BUILD_DIR)/ath25
   FACTORY:=$(DISTCL)-$(ARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -294,7 +301,6 @@ ifeq ($(T),rocket-m)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-rocket-m
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -327,7 +333,6 @@ ifeq ($(T),tl-2543-v1)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=tl-wr2543-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -338,7 +343,6 @@ ifeq ($(T),mc-mac1200r)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=mc-mac1200r
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -349,7 +353,6 @@ ifeq ($(T),tl-wr841-v7)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr841-v7
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -360,7 +363,6 @@ ifeq ($(T),tl-wr841-v8)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr841-v8
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -371,7 +373,6 @@ ifeq ($(T),tl-wr841-v9)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr841-v9
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -382,7 +383,6 @@ ifeq ($(T),tl-wr841-v10)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr841-v10
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -393,7 +393,6 @@ ifeq ($(T),tl-842n-v1)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr842n-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -404,7 +403,6 @@ ifeq ($(T),tl-wr703n-v1)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr703n-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -416,7 +414,6 @@ ifeq ($(T),tl-mr3020-v1)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-mr3020-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -427,7 +424,6 @@ ifeq ($(T),tl-mr3040)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-mr3040-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -438,7 +434,6 @@ ifeq ($(T),tl-wa7510n)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wa7510n
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -493,7 +488,6 @@ ifeq ($(T),tl-wr743nd-v1)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=tl-wr743nd-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -504,7 +498,6 @@ ifeq ($(T),tl-wr740n)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=-tl-wr740n-v1
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -515,7 +508,6 @@ ifeq ($(T),wpe72-8M)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=WPE72_8M
   FACTORY:=$(DISTLC)-$(ARCH)-$(SUBARCH)-wpe72-squashfs-8M-factory.img
   SYSUPGRADE:=$(DISTLC)-$(ARCH)-$(SUBARCH)-wpe72-squashfs-8M-sysupgrade.img
@@ -526,7 +518,6 @@ ifeq ($(T),dragino2)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=dragino2
   FACTORY:=$(DISTLC)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTLC)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -537,7 +528,6 @@ ifeq ($(T),unifi-ap)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-unifi
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -548,7 +538,6 @@ ifeq ($(T),uap-pro)
   ARCH:=ar71xx
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=ubnt-uap-pro
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -559,9 +548,9 @@ ifeq ($(T),vbox)
   ARCH:=x86
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=vm-qmp-big-node
-  MPNAME:=
-  IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-combined-ext4.vdi
+  MPNAME:=vbox
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVDI)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VDI)
 endif
 
 ifeq ($(T),vmware)
@@ -569,10 +558,9 @@ ifeq ($(T),vmware)
   ARCH:=x86
   TBUILD:=lede
   SUBARCH:=generic
-  PROFILE:=vm-qmp-big-node
-  MPNAME:=
-  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-combined-ext4.vmdk
-  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-combined-ext4.vmdk
+  MPNAME:=vmware
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVMDK)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VMDK)
 endif
 
 ifeq ($(T),vocore-8M)
@@ -580,7 +568,6 @@ ifeq ($(T),vocore-8M)
   ARCH:=ramips
   SUBARCH:=rt305x
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=vocore-8M
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -591,7 +578,6 @@ ifeq ($(T),vocore-16M)
   ARCH:=ramips
   SUBARCH:=rt305x
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=vocore-16M
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -602,7 +588,6 @@ ifeq ($(T),microwrt)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=microwrt
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -613,7 +598,6 @@ ifeq ($(T),wl-wn575a3)
   ARCH:=ramips
   SUBARCH:=mt7628
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=wl-wn575a3
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -624,7 +608,6 @@ ifeq ($(T),wt1520-4M)
   ARCH:=ramips
   SUBARCH:=rt305x
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=wt1520-4M
   FACTORY:=$(DISTLEGACY)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTLEGACY)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -646,7 +629,6 @@ ifeq ($(T),dir-810l)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=dir-810l
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -657,7 +639,6 @@ ifeq ($(T),miwifi-mini)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=miwifi-mini
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -668,7 +649,6 @@ ifeq ($(T),wrtnode)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=wrtnode
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -679,7 +659,6 @@ ifeq ($(T),wt3020-4M)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-tiny-node
   MPNAME:=wt3020-4M
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -690,7 +669,6 @@ ifeq ($(T),wt3020-8M)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=wt3020-8M
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -701,7 +679,6 @@ ifeq ($(T),zbt-ape522ii)
   ARCH:=ramips
   SUBARCH:=mt7620
   TBUILD:=lede
-  PROFILE:=qmp-small-node
   MPNAME:=zbt-ape522ii
   FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
@@ -712,20 +689,9 @@ ifeq ($(T),kvm)
   ARCH:=x86
   SUBARCH:=generic
   TBUILD:=lede
-  PROFILE:=kvm-qmp-big-node
-  MPNAME:=
-  IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-combined-ext4.img.gz
-endif
-
-ifeq ($(T),mpc85xx-generic-ib)
-  NAME:=mpc85xx_generic_imagebuilder
-  ARCH:=mpc85xx
-  SUBARCH:=generic
-  TBUILD:=lede
-  PROFILE:=mpc85xx-generic-imagebuilder
-  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  MPNAME:=
-  IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
+  MPNAME:=kvm
+	SQUASHIMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVDI)
+	EXT4IMAGE=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VDI)
 endif
 
 ifeq ($(T),sunxi-generic-ib)
@@ -738,26 +704,5 @@ ifeq ($(T),sunxi-generic-ib)
   IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
 endif
 
-ifeq ($(T),x86-generic-ib)
-  NAME:=x86_generic_imagebuilder
-  ARCH:=x86
-  SUBARCH:=generic
-  TBUILD:=lede
-  PROFILE:=x86-generic-imagebuilder
-  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  MPNAME:=
-  IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
-endif
-
-ifeq ($(T),x86-64-ib)
-  NAME:=x86_64_imagebuilder
-  ARCH:=x86
-  SUBARCH:=64
-  TBUILD:=lede
-  PROFILE:=x86-64-imagebuilder
-  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  MPNAME:=
-  IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
-endif
 
 DEVPKG ?= CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_$(DEVICE)=$PROFILE
