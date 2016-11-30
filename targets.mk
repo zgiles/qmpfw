@@ -40,7 +40,7 @@ TBUILD_LIST := lede
 DISTLEGACY:=lede
 
 MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x x86-generic x86-geode
-HW_AVAILABLE := alfa-nx bullet kvm nsm2 nsm5 nsm5-xw nslm5-xw rocket-m-xw pico2 rocket-m rs rspro mc-mac1200r tl-2543-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 tl-wr841-v10 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 wpe72-8M dragino2 alix soekris45xx x86 uap-pro unifi-ap vbox vmware vocore-8M vocore-16M wt1520-4M wt1520-8M cf-wr800n dir-810l microwrt miwifi-mini wl-wn575a3 wrtnode wt3020-4M wt3020-8M zbt-ape522ii lamobo-r1 sunxi-generic-ib
+HW_AVAILABLE := alfa-nx alix bullet cf-wr800n dir-810l dragino2 kvm lamobo-r1 mc-mac1200r microwrt miwifi-mini nslm5-xw nsm2 nsm5 nsm5-xw pico2 rocket-m rocket-m-xw rs rspro soekris45xx tl-2543-v1 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v10 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 uap-pro unifi-ap vbox vmware vocore-16M vocore-8M wl-wn575a3 wpe72-8M wrtnode wt1520-4M wt1520-8M wt3020-4M wt3020-8M x86 zbt-ape522ii sunxi-generic-ib
 
 ifeq ($(MPT),ath25-generic)
   TBUILD:=lede
