@@ -424,7 +424,7 @@ ifeq ($(T),tl-mr3020-v1)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
-ifeq ($(T),tl-mr3040)
+ifeq ($(T),tl-mr3040-v1)
   NAME:=TP-Link_TL-MR3040-v1
   ARCH:=ar71xx
   SUBARCH:=generic
