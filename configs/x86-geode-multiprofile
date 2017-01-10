@@ -22,4 +22,3 @@ CONFIG_PACKAGE_sqm-scripts-extra=m
 CONFIG_PACKAGE_tc=m
 CONFIG_PACKAGE_kmod-sched=m
 CONFIG_PACKAGE_kmod-sched-cake=m
-CONFIG_PACKAGE_ppp=m
