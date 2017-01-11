@@ -42,7 +42,7 @@ TBUILD_LIST := lede
 DISTLEGACY:=lede
 
 MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x x86-generic x86-geode x86-64
-HW_AVAILABLE := alfa-nx alix bullet cf-wr800n dir-810l dragino2 kvm kvm64 lamobo-r1 mc-mac1200r microwrt miwifi-mini nslm5-xw nsm2 nsm5 nsm5-xw pico2 rocket-m rocket-m-xw rs rspro soekris45xx tl-2543-v1 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v10 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 uap-pro unifi-ap vbox vbox64 vmware vmware64 vocore-16M vocore-8M wl-wn575a3 wpe72-8M wrtnode wt1520-4M wt1520-8M wt3020-4M wt3020-8M x86 x86-64 zbt-ape522ii sunxi-generic-ib
+HW_AVAILABLE := alfa-nx alix bullet cf-wr800n dir-810l dragino2 kvm kvm64 lamobo-r1 mc-mac1200r microwrt miwifi-mini nslm5-xw nsm2 nsm5 nsm5-xw pico2 rocket-m rocket-m-xw rs rspro soekris45xx tl-2543-v1 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v10 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 uap-pro unifiac-lite unifi-ap vbox vbox64 vmware vmware64 vocore-16M vocore-8M wl-wn575a3 wpe72-8M wrtnode wt1520-4M wt1520-8M wt3020-4M wt3020-8M x86 x86-64 zbt-ape522ii sunxi-generic-ib
 
 ifeq ($(MPT),ath25-generic)
   TBUILD:=lede
@@ -547,6 +547,16 @@ ifeq ($(T),dragino2)
   MPNAME:=dragino2
   FACTORY:=$(DISTLC)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
   SYSUPGRADE:=$(DISTLC)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
+endif
+
+ifeq ($(T),unifiac-lite)
+  NAME:=Ubiquiti_UniFi-AP-AC-Lite
+  ARCH:=ar71xx
+  SUBARCH:=generic
+  TBUILD:=lede
+  MPNAME:=ubnt-unifiac-lite
+  FACTORY:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHFACTORY)
+  SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
 ifeq ($(T),unifi-ap)
