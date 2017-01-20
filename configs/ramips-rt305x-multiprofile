@@ -15,3 +15,6 @@ CONFIG_PACKAGE_tc=m
 CONFIG_PACKAGE_kmod-sched=m
 CONFIG_PACKAGE_kmod-sched-cake=m
 CONFIG_PACKAGE_ppp=m
+CONFIG_PACKAGE_kmod-ath9k-htc=m
+CONFIG_PACKAGE_kmod-rt2800-usb=m
+CONFIG_PACKAGE_usb-modeswitch=m
