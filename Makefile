@@ -141,13 +141,20 @@ define copy_config_mptarget
 	$(if $(T),@echo "Using multi-profile $(ARCH)-$(SUBARCH) for target $(T)", @echo "Using multi-profile $(MPT)")
 
 	@cp -f $(CONFIG_DIR)/$(ARCH)-$(SUBARCH)-multiprofile $(CONFIG) || echo "WARNING: Config file not found!"
+	@echo "Adding qMp packages to targets:"
 	@for DEVICE in $(TINY); do \
+		echo "Adding qMp tiny package to targets:" ;\
+		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" $(CONFIG) ;\
 		echo $(DEVPKG)$$DEVICE=\"$(TINYPKG)\" >> $(CONFIG) ;\
 	done
 	@for DEVICE in $(SMALL); do \
+		echo "Adding qMp small package to targets:" ;\
+		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" $(CONFIG) ;\
 		echo $(DEVPKG)$$DEVICE=\"$(SMALLPKG)\" >> $(CONFIG) ; \
 	done
 	@for DEVICE in $(BIG); do \
+		echo "Adding qMp big package to targets:" ;\
+		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" $(CONFIG) ;\
 		echo $(DEVPKG)$$DEVICE=\"$(BIGPKG)\" >> $(CONFIG) ; \
 	done
 	cd $(BUILD_PATH) && make defconfig
