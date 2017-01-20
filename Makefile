@@ -22,8 +22,8 @@
 #	Roger Pueyo Centelles
 
 # Base distribution sources clone URLs
-LEDE_SOURCE_CLONE = git clone http://git.lede-project.org/source.git
-LEDE_PKG_CLONE = git clone https://git.lede-project.org/feed/packages.git
+LEDE_SOURCE_CLONE = git clone -b lede-17.01 http://git.lede-project.org/source.git
+LEDE_PKG_CLONE = git clone -b lede-17.01 https://git.lede-project.org/feed/packages.git
 
 # qMp packages source clone URLs and settings
 QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
@@ -40,7 +40,7 @@ VERSION_SUPPORT_URL ?= https://dev.qmp.cat/projects/qmp/wiki
 
 # Distribution versioning (e.g. Ratafia 2.0, Clearance testing, Kalimotxo trunk)
 VERSION_NICK ?= Kalimotxo
-VERSION_NUMBER ?= trunk
+VERSION_NUMBER ?= testing
 
 # Distribution repository
 VERSION_REPO="http://fw.qmp.cat/Releases/%v-%N"
