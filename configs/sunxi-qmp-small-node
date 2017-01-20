@@ -1,2 +1,0 @@
-CONFIG_TARGET_sunxi=y
-CONFIG_PACKAGE_qmp-small-node=y

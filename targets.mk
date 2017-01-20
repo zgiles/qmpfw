@@ -27,9 +27,11 @@ COMBINEDSQUASH := combined-squashfs.bin
 COMBINEDSQUASHIMG := combined-squashfs.img.gz
 COMBINEDSQUASHVDI := combined-squashfs.vdi
 COMBINEDSQUASHVMDK := combined-squashfs.vmdk
+EXT4SDCARD := ext4-sdcard.img.gz
 SDCARDVFATEXT4 := sdcard-vfat-ext4.img
 SQUASHFACTORY := squashfs-factory.bin
 SQUASHSYSUPGRADE := squashfs-sysupgrade.bin
+SQUASHFSSDCARD := squashfs-sdcard.img.gz
 
 BINEXT := bin
 
@@ -41,8 +43,8 @@ TBUILD_LIST := lede
 
 DISTLEGACY:=lede
 
-MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x x86-generic x86-geode x86-64
-HW_AVAILABLE := alfa-nx alix bullet cf-wr800n dir-810l dragino2 kvm kvm64 lamobo-r1 mc-mac1200r microwrt miwifi-mini nslm5-xw nsm2 nsm5 nsm5-xw pico2 rocket-m rocket-m-xw rs rspro soekris45xx tl-2543-v1 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v10 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 uap-pro unifiac-lite unifi-ap vbox vbox64 vmware vmware64 vocore-16M vocore-8M wl-wn575a3 wpe72-8M wrtnode wt1520-4M wt1520-8M wt3020-4M wt3020-8M x86 x86-64 zbt-ape522ii sunxi-generic-ib
+MP_AVAILABLE := ath25-generic ar71xx-generic brcm2708-bcm2708 brcm2708-bcm2709 brcm2708-bcm2710 mpc85xx-generic ramips-mt7620 ramips-mt7621 ramips-mt7628 ramips-rt305x sunxi-generic x86-generic x86-geode x86-64
+HW_AVAILABLE := alfa-nx alix bullet cf-wr800n dir-810l dragino2 kvm kvm64 lamobo-r1 mc-mac1200r microwrt miwifi-mini nslm5-xw nsm2 nsm5 nsm5-xw pico2 rocket-m rocket-m-xw rs rspro soekris45xx tl-2543-v1 tl-842n-v1 tl-mr3020-v1 tl-mr3040-v1 tl-wa7510n tl-wdr3500-v1 tl-wdr3600 tl-wdr4300 tl-wdr4900-v1 tl-wr703n-v1 tl-wr743nd-v1 tl-wr841-v10 tl-wr841-v7 tl-wr841-v8 tl-wr841-v9 uap-pro unifiac-lite unifi-ap vbox vbox64 vmware vmware64 vocore-16M vocore-8M wl-wn575a3 wpe72-8M wrtnode wt1520-4M wt1520-8M wt3020-4M wt3020-8M x86 x86-64 zbt-ape522ii
 
 ifeq ($(MPT),ath25-generic)
   TBUILD:=lede
@@ -143,6 +145,16 @@ ifeq ($(MPT),ramips-rt305x)
   TINY:=wt1520-4M
   SMALL:=wt1520-8M
   BIG:=
+endif
+
+ifeq ($(MPT),sunxi-generic)
+  TBUILD:=lede
+  ARCH:=sunxi
+  SUBARCH:=generic
+  DEVPKG:=CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_DEVICE_$(DEVICE)
+  TINY:=
+  SMALL:=
+  BIG:=sun7i-a20-lamobo-r1
 endif
 
 #This architecture is not really multi-profile, but generates all images
@@ -296,9 +308,10 @@ ifeq ($(T),lamobo-r1)
   ARCH:=sunxi
   SUBARCH:=generic
   TBUILD:=lede
-  MPNAME:=
-  PROFILE:=sunxi-qmp-small-node
-  IMAGE:=$(DISTCL)-$(ARCH)-$(NAME)-$(SDCARDVFATEXT4)
+  MPNAME:=sun7i-a20-lamobo-r1
+  SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(MPNAME)-$(SQUASHFSSDCARD)
+  EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(MPNAME)-$(EXT4SDCARD)
+  BINEXT=img.gz
 endif
 
 ifeq ($(T),rocket-m-xw)
@@ -762,16 +775,5 @@ ifeq ($(T),kvm64)
 	SQUASHIMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDSQUASHVDI)
 	EXT4IMAGE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(COMBINEDEXT4VDI)
 endif
-
-ifeq ($(T),sunxi-generic-ib)
-  NAME:=sunxi_imagebuilder
-  ARCH:=sunxi
-  TBUILD:=lede
-  PROFILE:=sunxi-imagebuilder
-  override MAKE_SRC = -j$(J) V=$(V) IGNORE_ERRORS=1
-  MPNAME:=
-  IMAGE:=LEDE-ImageBuilder-$(ARCH)_generic-for-linux-x86_64.tar.bz2 ImageBuilder-qMp-$(ARCH)-x86_64.tar.bz2
-endif
-
 
 DEVPKG ?= CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_$(DEVICE)=$PROFILE
