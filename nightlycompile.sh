@@ -5,7 +5,7 @@
 #
 # Example of usage:
 # FORCE="1" TARGETS="alix rspro" COMMUNITY="myNet" BRANCH="testing" ./nightlycompile.sh
-# 
+#
 
 # Mail to send alerts in case something goes wrong
 MAIL="admin@qmp.cat"
@@ -61,7 +61,6 @@ for t in $TARGETS; do
 	[ $? -ne 0 ] && [ ! -z "$MAIL" ] && echo "Error detected during QMP compilation process (for target $t)" | mail -s "[qMp] build system" $MAIL && ./scripts/extra-packages.script POST_BUILD "ar71xx" $t $EXTRA_PACKS
 done
 
-[ $DAYS_TO_PRESERVE -gt 0 ] && find images/ -iname "*.bin" -type f -mtime +$DAYS_TO_PRESERVE -exec rm -f '{}' \;
+[ $DAYS_TO_PRESERVE -gt 0 ] && find images/ -iname $COMMUNITY*.* -type f -mtime +$DAYS_TO_PRESERVE -exec rm -f '{}' \;
 
-(cd images && md5sum *.bin > IMAGES)
-
+(cd images && md5sum $COMMUNITY*.* > IMAGES)
