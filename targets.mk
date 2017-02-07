@@ -112,7 +112,8 @@ ifeq ($(MPT),ramips-mt7620)
   ARCH:=ramips
   SUBARCH:=mt7620
   DEVPKG:=CONFIG_TARGET_DEVICE_PACKAGES_$(ARCH)_$(SUBARCH)_DEVICE_$(DEVICE)
-  TINY:=wt3020-4M
+  SYSTEM:=wt3020-4M
+  TINY:=
   SMALL:=cf-wr800n dir-810l microwrt miwifi-mini wrtnode wt3020-8M zbt-ape522ii
   BIG:=
 endif
