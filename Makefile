@@ -43,7 +43,7 @@ VERSION_NICK ?= Macondo
 VERSION_NUMBER ?= 4.0-rc1
 
 # Distribution repository
-VERSION_REPO="http://fw.qmp.cat/Releases/%v-%N"
+VERSION_REPO="http://fw.qmp.cat/Releases/%v"
 
 # Image customization
 IMAGEOPT ?= true
