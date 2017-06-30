@@ -43,7 +43,7 @@ VERSION_NICK ?= Kalimotxo
 VERSION_NUMBER ?= testing
 
 # Distribution repository
-VERSION_REPO="http://fw.qmp.cat/Releases/%v-%N"
+VERSION_REPO="http://fw.qmp.cat/Releases/%v"
 
 # Image customization
 IMAGEOPT ?= true
