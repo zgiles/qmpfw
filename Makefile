@@ -28,7 +28,7 @@ LEDE_PKG_CLONE = git clone -b lede-17.01 https://git.lede-project.org/feed/packa
 # qMp packages source clone URLs and settings
 QMP_GIT_RW = ssh://gitolite@dev.qmp.cat:qmp.git
 QMP_GIT_RO = http://dev.qmp.cat/qmp.git
-QMP_GIT_BRANCH ?= testing
+QMP_GIT_BRANCH ?= master
 QMP_FEED = package/feeds/qmp_packages
 
 # Distribution naming
