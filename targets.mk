@@ -500,24 +500,6 @@ ifeq ($(T),tl-wdr3500-v1)
   SYSUPGRADE:=$(DISTCL)-$(ARCH)-$(SUBARCH)-$(MPNAME)-$(SQUASHSYSUPGRADE)
 endif
 
-ifeq ($(T),tl-wa7510n)
-  NAME:=TP-Link_TL-WA7510N
-  ARCH:=ar71xx
-  TBUILD:=openwrt
-  PROFILE:=ath-qmp-tiny-node
-  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wa7510n-squashfs-sysupgrade.bin
-endif
-
-ifeq ($(T),tl-wdr3500-v1)
-  NAME:=TP-Link_TL-WDR3500-v1
-  ARCH:=ar71xx
-  TBUILD:=openwrt
-  PROFILE:=ath-qmp-big-node
-  IMAGE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-factory.bin
-  SYSUPGRADE:=bin/$(ARCH)/qmp-ar71xx-generic-tl-wdr3500-v1-squashfs-sysupgrade.bin
-endif
-
 ifeq ($(T),tl-wdr3600)
   NAME:=TP-Link_TL-WDR3600-v1
   ARCH:=ar71xx
